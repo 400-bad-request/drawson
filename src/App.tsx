@@ -4,6 +4,8 @@ import { ResizableBox } from "./components/ResizableBox/ResizableBox";
 import { BAR_WIDTH } from "./utils/constants";
 import BarType from "./utils/BarType";
 import { ResizeBar } from "./components/ResizeBar/ResizeBar";
+import { CodeEditor } from "./components/CodeEditor/CodeEditor";
+import { CodeDisplay } from "./components/CodeDisplay/CodeDisplay";
 
 let resizingVertical = false;
 let resizingHorizontal = false;
@@ -61,20 +63,15 @@ const App = () => {
   return (
     <div className="App">
       <ResizableBox width={width} height={window.innerHeight}>
-        <ResizableBox
-          width={width}
-          height={height}
-          style={{ backgroundColor: "red" }}
-        />
+        <CodeEditor width={width} height={height} />
         <ResizeBar
           length={width}
           orientation={BarType.HORIZONTAL}
           onMouseDown={mouseDownHorizontal}
         />
-        <ResizableBox
+        <CodeDisplay
           width={width}
           height={window.innerHeight - height - BAR_WIDTH}
-          style={{ backgroundColor: "green" }}
         />
       </ResizableBox>
       <ResizeBar
@@ -86,7 +83,12 @@ const App = () => {
         width={window.innerWidth - BAR_WIDTH / 2 - width}
         height={window.innerHeight}
         style={{ backgroundColor: "blue" }}
-      />
+      >
+        <img
+          src="https://www.dailydot.com/wp-content/uploads/2018/04/pattern-2048x1024.jpg"
+          style={{ width: "100%" }}
+        />
+      </ResizableBox>
     </div>
   );
 };

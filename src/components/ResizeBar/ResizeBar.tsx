@@ -1,6 +1,7 @@
 import React from "react";
 import BarType from "../../utils/BarType";
 import { BAR_WIDTH } from "../../utils/constants";
+import "./ResizeBar.scss";
 
 interface Props {
   orientation: BarType;
@@ -19,6 +20,7 @@ export const ResizeBar: React.SFC<Props> = ({
 }) => {
   return (
     <div
+      className="resize-bar"
       onMouseUp={onMouseUp}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
@@ -32,13 +34,13 @@ const getStyle = (orientation: BarType, length: number) => {
     return {
       width: length + "px",
       height: BAR_WIDTH,
-      cursor: "ns-resize"
+      cursor: "row-resize"
     };
   } else {
     return {
       height: length + "px",
       width: BAR_WIDTH,
-      cursor: "ew-resize"
+      cursor: "col-resize"
     };
   }
 };
