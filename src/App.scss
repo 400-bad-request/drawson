@@ -1,4 +1,16 @@
 .App {
   display: flex;
   flex: 1;
+  flex-direction: row;
+}
+
+.half-window {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.horizontal-window {
+  display: flex;
+  flex: 1;
 }
