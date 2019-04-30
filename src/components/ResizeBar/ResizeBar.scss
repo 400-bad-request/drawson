@@ -1,5 +1,7 @@
+@import "../../_Settings";
+
 .resize-bar {
-  background-color: #999999;
+  background-color: $primaryBackgroundColor;
   display: flex;
   align-items: center;
   justify-content: center;

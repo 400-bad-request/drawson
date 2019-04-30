@@ -1,1 +1,1 @@
-export const BAR_WIDTH = 8;
+export const BAR_WIDTH = 6;
