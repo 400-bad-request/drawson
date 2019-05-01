@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./RootBox.scss";
-import {BAR_WIDTH} from "../../utils/constants";
+import {NAVIGATION_BAR_HEIGHT, RESIZE_BAR_WIDTH} from "../../utils/constants";
 import {ResizableBox} from "../ResizableBox/ResizableBox";
 import {CodeEditor} from "../CodeEditor/CodeEditor";
 import {CodeDisplay} from "../CodeDisplay/CodeDisplay";
@@ -14,12 +14,12 @@ let cachedWidth: number, cachedHeight: number;
 let startX: number, startY: number;
 
 const RootBox = () => {
-    const [width, setWidth] = useState((window.innerWidth - BAR_WIDTH) / 2);
-    const [height, setHeight] = useState((window.innerHeight - BAR_WIDTH) / 2);
+    const [width, setWidth] = useState((window.innerWidth - RESIZE_BAR_WIDTH) / 2);
+    const [height, setHeight] = useState((window.innerHeight - RESIZE_BAR_WIDTH - NAVIGATION_BAR_HEIGHT) / 2);
 
     const setDimensions = () => {
-        setWidth((window.innerWidth - BAR_WIDTH) / 2);
-        setHeight((window.innerHeight - BAR_WIDTH) / 2);
+        setWidth((window.innerWidth - RESIZE_BAR_WIDTH) / 2);
+        setHeight((window.innerHeight - RESIZE_BAR_WIDTH - NAVIGATION_BAR_HEIGHT) / 2);
     };
 
     const mouseDownVertical = (e: MouseEvent) => {
@@ -63,7 +63,7 @@ const RootBox = () => {
 
     return (
         <div className="RootBox">
-            <ResizableBox width={width} height={window.innerHeight}>
+            <ResizableBox width={width} height={window.innerHeight - NAVIGATION_BAR_HEIGHT}>
                 <CodeEditor width={width} height={height} />
                 <ResizeBar
                     length={width}
@@ -72,17 +72,17 @@ const RootBox = () => {
                 />
                 <CodeDisplay
                     width={width}
-                    height={window.innerHeight - height - BAR_WIDTH}
+                    height={window.innerHeight - height - NAVIGATION_BAR_HEIGHT - RESIZE_BAR_WIDTH}
                 />
             </ResizableBox>
             <ResizeBar
-                length={window.innerHeight}
+                length={window.innerHeight - NAVIGATION_BAR_HEIGHT}
                 orientation={BarType.VERTICAL}
                 onMouseDown={mouseDownVertical}
             />
             <ResizableBox
-                width={window.innerWidth - BAR_WIDTH / 2 - width}
-                height={window.innerHeight}
+                width={window.innerWidth - RESIZE_BAR_WIDTH / 2 - width}
+                height={window.innerHeight - NAVIGATION_BAR_HEIGHT}
             >
                 <CanvasDisplay/>
             </ResizableBox>
