@@ -3,5 +3,22 @@
 .NavigationBar {
   background-color: $primaryBackgroundColor;
   height: $navigationBarHeight;
+  padding: 0 15px;
+
   align-self: stretch;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.NavigationBarGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }

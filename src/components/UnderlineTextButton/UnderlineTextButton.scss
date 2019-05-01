@@ -1,0 +1,50 @@
+@import "../../_Settings";
+
+.UnderlineTextButton {
+  position: relative;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+  height: fit-content;
+  line-height: 0;
+  word-wrap: break-word;
+  padding: 20px 0;
+  margin: 0 10px;
+  text-decoration: none;
+  color: $primaryButtonColor;
+
+  &:hover {
+    color: $primaryButtonHoverColor;
+  }
+
+  &.over::before {
+    background: $primaryButtonHoverColor;
+    width: 100%;
+    position: absolute;
+    top: -5px;
+    height: 3px;
+    left: 0;
+    z-index: 100;
+    display: block;
+  }
+
+  &.under::after {
+    background: $primaryButtonHoverColor;
+    width: 100%;
+    position: absolute;
+    bottom: -1px;
+    height: 3px;
+    left: 0;
+    z-index: 100;
+    display: block;
+  }
+
+  &.over:hover::before {
+    content: '';
+  }
+
+  &.under:hover::after {
+    content: '';
+  }
+}
