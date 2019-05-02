@@ -19,7 +19,9 @@
     "react": "^16.8.6",
     "react-ace": "^6.5.0",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
     "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
     "typescript": "3.4.1"
   },
   "eslintConfig": {
@@ -32,6 +34,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/react-redux": "^7.0.8",
     "prettier": "^1.17.0"
   }
 }
