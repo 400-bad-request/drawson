@@ -1,6 +1,6 @@
 enum BarType {
   VERTICAL,
-  HORIZONTAL
+  HORIZONTAL,
 }
 
-export default BarType;
+export default BarType

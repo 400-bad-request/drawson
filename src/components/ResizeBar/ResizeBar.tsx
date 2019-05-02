@@ -1,14 +1,14 @@
-import React from "react";
-import BarType from "../../utils/BarType";
-import { RESIZE_BAR_WIDTH } from "../../utils/constants";
-import "./ResizeBar.scss";
+import React from 'react'
+import BarType from '../../utils/BarType'
+import { RESIZE_BAR_WIDTH } from '../../utils/constants'
+import './ResizeBar.scss'
 
 interface Props {
-  orientation: BarType;
-  length: number;
-  onMouseDown?: any;
-  onMouseMove?: any;
-  onMouseUp?: any;
+  orientation: BarType
+  length: number
+  onMouseDown?: any
+  onMouseMove?: any
+  onMouseUp?: any
 }
 
 export const ResizeBar: React.SFC<Props> = ({
@@ -16,7 +16,7 @@ export const ResizeBar: React.SFC<Props> = ({
   length,
   onMouseUp,
   onMouseDown,
-  onMouseMove
+  onMouseMove,
 }) => {
   return (
     <div
@@ -26,21 +26,21 @@ export const ResizeBar: React.SFC<Props> = ({
       onMouseMove={onMouseMove}
       style={getStyle(orientation, length)}
     />
-  );
-};
+  )
+}
 
 const getStyle = (orientation: BarType, length: number) => {
   if (orientation === BarType.HORIZONTAL) {
     return {
-      width: length + "px",
+      width: length + 'px',
       height: RESIZE_BAR_WIDTH,
-      cursor: "row-resize"
-    };
+      cursor: 'row-resize',
+    }
   } else {
     return {
-      height: length + "px",
+      height: length + 'px',
       width: RESIZE_BAR_WIDTH,
-      cursor: "col-resize"
-    };
+      cursor: 'col-resize',
+    }
   }
-};
+}
