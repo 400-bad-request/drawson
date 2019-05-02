@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 
 interface Props {
   width: number;
@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-export const ResizableBox: React.SFC<Props> = ({ width, height, ...props }) => {
+export const ResizableBox: FunctionComponent<Props> = ({ width, height, ...props }) => {
   return (
     <div
       className={props.className}

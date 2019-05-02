@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FunctionComponent} from 'react'
 import BarType from '../../utils/BarType'
 import { RESIZE_BAR_WIDTH } from '../../utils/constants'
 import './ResizeBar.scss'
@@ -11,7 +11,7 @@ interface Props {
   onMouseUp?: any
 }
 
-export const ResizeBar: React.SFC<Props> = ({
+export const ResizeBar: FunctionComponent<Props> = ({
   orientation,
   length,
   onMouseUp,
