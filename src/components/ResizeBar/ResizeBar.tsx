@@ -1,6 +1,6 @@
 import React from "react";
 import BarType from "../../utils/BarType";
-import { BAR_WIDTH } from "../../utils/constants";
+import { RESIZE_BAR_WIDTH } from "../../utils/constants";
 import "./ResizeBar.scss";
 
 interface Props {
@@ -33,13 +33,13 @@ const getStyle = (orientation: BarType, length: number) => {
   if (orientation === BarType.HORIZONTAL) {
     return {
       width: length + "px",
-      height: BAR_WIDTH,
+      height: RESIZE_BAR_WIDTH,
       cursor: "row-resize"
     };
   } else {
     return {
       height: length + "px",
-      width: BAR_WIDTH,
+      width: RESIZE_BAR_WIDTH,
       cursor: "col-resize"
     };
   }
