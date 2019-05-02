@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 import {NavigationBar} from "./components/NavigationBar/NavigationBar";
-import RootBox from "./components/RootBox/BootBox";
+import RootBox from "./components/RootBox/RootBox";
 
 
 const App = () => {

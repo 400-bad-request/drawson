@@ -6,6 +6,12 @@ export const NavigationBar = () => {
     return(
         <div className="NavigationBar">
             <div className="NavigationBarGroup">
+                <div className="Logo">
+                    <img alt={"Drawson"}
+                         src={"/images/Logo.png"}
+                         style={{maxHeight: 30}}
+                    />
+                </div>
                 <UnderlineTextButton
                     label={"IMPORT"}
                     under={true}
