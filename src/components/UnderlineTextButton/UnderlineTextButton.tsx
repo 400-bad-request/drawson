@@ -28,7 +28,7 @@ export const UnderlineTextButton = (props: IProps) => {
       key={props.key}
       style={props.style}
     >
-      {!props.rout && props.label}
+      {props.label}
     </div>
   )
 }

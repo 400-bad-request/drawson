@@ -1,5 +1,6 @@
 import React from "react";
 import "./CanvasDisplay.scss";
+import {DrawEngine} from "../../logic/DrawEngine";
 
 interface IProps {
     width: number;
@@ -9,19 +10,20 @@ interface IProps {
 export class CanvasDisplay extends React.Component<IProps, {}> {
 
     protected displayCanvas:HTMLCanvasElement;
+    protected drawEngine:DrawEngine;
 
     public componentDidMount(): void {
-        this.resizeCanvas(this.props.width, this.props.height)
+        this.drawEngine = new DrawEngine(this.displayCanvas, []);
+        this.resizeCanvas();
     }
 
-    public componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>): void {
-        this.resizeCanvas(this.props.width, this.props.height)
+    public componentDidUpdate(): void {
+        this.resizeCanvas()
     }
 
-    private resizeCanvas(width: number, height: number) {
-        if (!!this.displayCanvas) {
-            this.displayCanvas.width = width;
-            this.displayCanvas.height = height;
+    private resizeCanvas() {
+        if (!!this.displayCanvas && !!this.drawEngine) {
+            this.drawEngine.updateSize({width: this.props.width, height: this.props.height})
         }
     }
 

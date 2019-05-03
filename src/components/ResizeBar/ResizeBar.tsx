@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react'
-import BarType from '../../utils/BarType'
-import { RESIZE_BAR_WIDTH } from '../../utils/constants'
+import BarType from '../../data/BarType'
 import './ResizeBar.scss'
+import {Settings} from "../../settings/Settings";
 
 interface Props {
   orientation: BarType
@@ -27,19 +27,19 @@ export const ResizeBar: FunctionComponent<Props> = ({
       style={getStyle(orientation, length)}
     />
   )
-}
+};
 
 const getStyle = (orientation: BarType, length: number) => {
   if (orientation === BarType.HORIZONTAL) {
     return {
       width: length + 'px',
-      height: RESIZE_BAR_WIDTH,
+      height: Settings.RESIZE_BAR_WIDTH,
       cursor: 'row-resize',
     }
   } else {
     return {
       height: length + 'px',
-      width: RESIZE_BAR_WIDTH,
+      width: Settings.RESIZE_BAR_WIDTH,
       cursor: 'col-resize',
     }
   }
