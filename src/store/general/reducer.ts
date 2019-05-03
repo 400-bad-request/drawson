@@ -8,7 +8,7 @@ import {
 } from "./types";
 
 const initialState: GeneralState = {
-    isImportPopupOpen: true,
+    isImportPopupOpen: false,
     isExportPopupOpen: false,
     isOptionsPopupOpen: false,
     isAboutPopupOpen: false
