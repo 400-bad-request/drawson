@@ -3,13 +3,16 @@ import AceEditor from "react-ace";
 
 import "brace/theme/monokai";
 import {MockState} from "../../data/MockState";
+import {AppState} from "../../store";
+import {connect} from "react-redux";
 
 interface Props {
   width: number;
   height: number;
+  compilationOutput: any[];
 }
 
-export const CodeDisplay: FunctionComponent<Props> = ({ width, height }) => {
+const CodeDisplayComponent: FunctionComponent<Props> = ({ width, height }) => {
   return (
     <AceEditor
         theme={"github"}
@@ -22,3 +25,9 @@ export const CodeDisplay: FunctionComponent<Props> = ({ width, height }) => {
     />
   );
 };
+
+const mapStateToProps = (state: AppState) => ({
+  compilationOutput: state.editor.compilationOutput,
+});
+
+export const CodeDisplay = connect(mapStateToProps)(CodeDisplayComponent);
