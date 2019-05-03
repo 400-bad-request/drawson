@@ -1,8 +1,15 @@
 import React from "react";
 import "./NavigationBar.scss";
 import {UnderlineTextButton} from "../UnderlineTextButton/UnderlineTextButton";
+import {AppState} from "../../store";
+import {connect} from "react-redux";
 
-export const NavigationBar = () => {
+interface IProps {
+    isImportPopupOpen: boolean;
+}
+
+const NavigationBarComponent = (props:IProps) => {
+    console.log(props.isImportPopupOpen);
     return(
         <div className="NavigationBar">
             <div className="NavigationBarGroup">
@@ -15,9 +22,14 @@ export const NavigationBar = () => {
                 <UnderlineTextButton
                     label={"IMPORT"}
                     under={true}
+                    active={props.isImportPopupOpen}
                 />
                 <UnderlineTextButton
                     label={"EXPORT"}
+                    under={true}
+                />
+                <UnderlineTextButton
+                    label={"OPTIONS"}
                     under={true}
                 />
                 <UnderlineTextButton
@@ -34,3 +46,9 @@ export const NavigationBar = () => {
         </div>
     )
 };
+
+const mapStateToProps = (state: AppState) => ({
+    isImportPopupOpen: state.general.isImportPopupOpen
+});
+
+export const NavigationBar = connect(mapStateToProps)(NavigationBarComponent);

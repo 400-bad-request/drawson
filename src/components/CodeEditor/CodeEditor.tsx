@@ -12,7 +12,7 @@ interface Props {
 export const CodeEditor: FunctionComponent<Props> = ({ width, height }) => {
   return (
       <AceEditor
-          theme={"monokai"}
+          theme={"github"}
           width={width + "px"}
           height={height + "px"}
           fontSize={16}
