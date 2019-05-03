@@ -1,19 +1,22 @@
 import React from "react";
 import "./CanvasDisplay.scss";
 import {DrawEngine} from "../../logic/DrawEngine";
+import {AppState} from "../../store";
+import {connect} from "react-redux";
 
 interface IProps {
     width: number;
     height: number;
+    compilationOutput: any[];
 }
 
-export class CanvasDisplay extends React.Component<IProps, {}> {
+export class CanvasDisplayComponent extends React.Component<IProps, {}> {
 
     protected displayCanvas:HTMLCanvasElement;
     protected drawEngine:DrawEngine;
 
     public componentDidMount(): void {
-        this.drawEngine = new DrawEngine(this.displayCanvas, []);
+        this.drawEngine = new DrawEngine(this.displayCanvas, this.props.compilationOutput);
         this.resizeCanvas();
     }
 
@@ -35,3 +38,9 @@ export class CanvasDisplay extends React.Component<IProps, {}> {
         );
     }
 }
+
+const mapStateToProps = (state: AppState) => ({
+    compilationOutput: state.editor.compilationOutput,
+});
+
+export const CanvasDisplay = connect(mapStateToProps)(CanvasDisplayComponent);

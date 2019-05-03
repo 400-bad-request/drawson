@@ -107,6 +107,14 @@ export class DrawEngine {
     }
 
     public drawContent() {
-
+        this.content.forEach((object:any) => {
+            if (object.hasOwnProperty("type")) {
+                switch (object.type) {
+                    case "circle":
+                        DrawUtil.drawCircle(this.canvas, {x: object.x + this.anchor.x, y: object.y + this.anchor.y}, object.r, 0, 360, object.line_color, object.line_thickness);
+                    break;
+                }
+            }
+        })
     }
 }
