@@ -13,7 +13,7 @@ let resizingHorizontal = false
 let cachedWidth: number, cachedHeight: number
 let startX: number, startY: number
 
-const RootBox = () => {
+const RootComponent = () => {
   const [width, setWidth] = useState((window.innerWidth - RESIZE_BAR_WIDTH) / 2)
   const [height, setHeight] = useState(
     (window.innerHeight - RESIZE_BAR_WIDTH - NAVIGATION_BAR_HEIGHT) / 2
@@ -102,4 +102,4 @@ const RootBox = () => {
   )
 }
 
-export default RootBox
+export default RootComponent

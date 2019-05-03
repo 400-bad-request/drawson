@@ -3,13 +3,16 @@ import AceEditor from 'react-ace'
 import './CodeEditor.scss'
 
 import 'brace/theme/monokai'
+import { AppState } from '../../store'
+import { connect } from 'react-redux'
+import { EditorState } from '../../store/editor/types'
 
 interface Props {
   width: number
   height: number
 }
 
-export const CodeEditor: FunctionComponent<Props> = ({ width, height }) => {
+const CodeEditorComponent: FunctionComponent<Props> = ({ width, height }) => {
   return (
     <AceEditor
       theme={'github'}
@@ -19,3 +22,18 @@ export const CodeEditor: FunctionComponent<Props> = ({ width, height }) => {
     />
   )
 }
+
+export const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export const mapStateToProps = (state: EditorState) => ({
+
+});
+
+export const CodeEditor =  connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CodeEditorComponent)
+
+

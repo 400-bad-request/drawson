@@ -1,13 +1,13 @@
 import React from 'react'
 import './App.scss'
 import { NavigationBar } from './components/NavigationBar/NavigationBar'
-import RootBox from './components/RootBox/RootBox'
+import RootComponent from './components/RootComponent/RootComponent'
 
 const App = () => {
   return (
     <div className="App">
       <NavigationBar />
-      <RootBox />
+      <RootComponent />
     </div>
   )
 }
