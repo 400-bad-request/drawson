@@ -15,18 +15,18 @@ Tokens used in a programming language used to draw on canvas
 ## Example snippets
 
 ```
-set color #000000
+set color "#000000"
 draw rect 10 10 50 50
 draw circle 10 10 25 fill
 draw ellipse 15 15 14 13 fill
 draw line 10 10 20 20
 clear
 
-set color #FFFFFF
+set color "#FFFFFF"
 clear # this clears the context so color line width and stuff
 
 # my idea of how to make a moveto and lineto
-set color #666666
+set color "#666666"
 # I think we can make sth like paretheses but optional
 draw line (10 10) (20 20) (30 30) (45 50) fill
 # so basivally we define points of our line and
@@ -34,7 +34,7 @@ draw line (10 10) (20 20) (30 30) (45 50) fill
 clear
 
 # example of loops
-set color #000000
+set color "#000000"
 set lineWidth 12
 for el in 0 20
     draw circle el / 2 el * 2 20 20
@@ -44,10 +44,13 @@ clear
 # so that we will be operating only in global scope
 # so setting variable
 set myVar 12
-set SOME_CONST #000FFF
+set SOME_CONST "#000FFF"
 
 # clear behavior
 clear # clears all stuff from scope so all variables
 clear myVar lineWidth color # clears only those passed as parameters
 
 ```
+
+Moim zdaniem te rzeczy kontekstowe możemy zrobić tak, że będą miały swoje defaultsy
+Możemy sobie je zrobić takimi predefiniowanymi wartościami
