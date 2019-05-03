@@ -84,7 +84,10 @@ const RootBox = () => {
                 width={window.innerWidth - RESIZE_BAR_WIDTH / 2 - width}
                 height={window.innerHeight - NAVIGATION_BAR_HEIGHT}
             >
-                <CanvasDisplay/>
+                <CanvasDisplay
+                    width={window.innerWidth - RESIZE_BAR_WIDTH / 2 - width}
+                    height={window.innerHeight - NAVIGATION_BAR_HEIGHT}
+                />
             </ResizableBox>
         </div>
     );
