@@ -14,7 +14,8 @@
   text-decoration: none;
   color: $primaryButtonColor;
 
-  &:hover, &.active {
+  &:hover,
+  &.active {
     color: $primaryButtonHoverColor;
   }
 
@@ -40,11 +41,13 @@
     display: block;
   }
 
-  &.over:hover::before, &.over.active::before {
+  &.over:hover::before,
+  &.over.active::before {
     content: '';
   }
 
-  &.under:hover::after, &.under.active::after {
+  &.under:hover::after,
+  &.under.active::after {
     content: '';
   }
 }

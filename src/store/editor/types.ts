@@ -1,15 +1,14 @@
-export const UPDATE_COMPILATION_OUTPUT = 'UPDATE_COMPILATION_OUTPUT';
+export const UPDATE_COMPILATION_OUTPUT = 'UPDATE_COMPILATION_OUTPUT'
 
 export type EditorState = {
-    compilationOutput: any[];
+  compilationOutput: any[]
 }
 
 interface UpdateCompilationOutputAction {
-    type: typeof UPDATE_COMPILATION_OUTPUT;
-    payload: {
-        compilationOutput: any[];
-    }
+  type: typeof UPDATE_COMPILATION_OUTPUT
+  payload: {
+    compilationOutput: any[]
+  }
 }
 
-export type EditorActionTypes =
-    | UpdateCompilationOutputAction
+export type EditorActionTypes = UpdateCompilationOutputAction

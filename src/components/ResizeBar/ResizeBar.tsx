@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react'
+import React, { FunctionComponent } from 'react'
 import BarType from '../../utils/BarType'
 import { RESIZE_BAR_WIDTH } from '../../utils/constants'
 import './ResizeBar.scss'
