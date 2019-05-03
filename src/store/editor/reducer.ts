@@ -1,9 +1,6 @@
-import {
-  EditorActionTypes,
-  EditorState,
-  UPDATE_COMPILATION_OUTPUT,
-} from './types'
+import { EditorActionTypes, EditorState } from './types'
 import { MockState } from '../../data/MockState'
+import { Action } from '../Action'
 
 const initialState: EditorState = {
   compilationOutput: MockState,
@@ -14,7 +11,7 @@ export function editorReducer(
   action: EditorActionTypes
 ): EditorState {
   switch (action.type) {
-    case UPDATE_COMPILATION_OUTPUT: {
+    case Action.UPDATE_COMPILATION_OUTPUT: {
       return {
         ...state,
         compilationOutput: action.payload.compilationOutput,

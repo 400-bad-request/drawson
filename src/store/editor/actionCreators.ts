@@ -1,10 +1,11 @@
-import { EditorActionTypes, UPDATE_COMPILATION_OUTPUT } from './types'
+import { EditorActionTypes } from './types'
+import { Action } from '../Action'
 
 export function updateCompilationOutput(
   compilationOutput: any[]
 ): EditorActionTypes {
   return {
-    type: UPDATE_COMPILATION_OUTPUT,
+    type: Action.UPDATE_COMPILATION_OUTPUT,
     payload: {
       compilationOutput,
     },

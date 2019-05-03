@@ -8,7 +8,7 @@ import {
   updateExportPopupStatus,
   updateImportPopupStatus,
   updateOptionsPopupStatus,
-} from '../../store/general/actions'
+} from '../../store/general/actionCreators'
 
 interface IProps {
   updateImportPopupStatus: (status: boolean) => any

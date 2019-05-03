@@ -1,7 +1,4 @@
-export const UPDATE_IMPORT_POPUP_STATUS = 'UPDATE_IMPORT_POPUP_STATUS'
-export const UPDATE_EXPORT_POPUP_STATUS = 'UPDATE_EXPORT_POPUP_STATUS'
-export const UPDATE_OPTIONS_POPUP_STATUS = 'UPDATE_OPTIONS_POPUP_STATUS'
-export const UPDATE_ABOUT_POPUP_STATUS = 'UPDATE_ABOUT_POPUP_STATUS'
+import { Action } from '../Action'
 
 export type GeneralState = {
   isImportPopupOpen: boolean
@@ -11,28 +8,28 @@ export type GeneralState = {
 }
 
 interface UpdateImportPopupStatusAction {
-  type: typeof UPDATE_IMPORT_POPUP_STATUS
+  type: typeof Action.UPDATE_IMPORT_POPUP_STATUS
   payload: {
     status: boolean
   }
 }
 
 interface UpdateExportPopupStatusAction {
-  type: typeof UPDATE_EXPORT_POPUP_STATUS
+  type: typeof Action.UPDATE_EXPORT_POPUP_STATUS
   payload: {
     status: boolean
   }
 }
 
 interface UpdateOptionsPopupStatusAction {
-  type: typeof UPDATE_OPTIONS_POPUP_STATUS
+  type: typeof Action.UPDATE_OPTIONS_POPUP_STATUS
   payload: {
     status: boolean
   }
 }
 
 interface UpdateAboutPopupStatusAction {
-  type: typeof UPDATE_ABOUT_POPUP_STATUS
+  type: typeof Action.UPDATE_ABOUT_POPUP_STATUS
   payload: {
     status: boolean
   }
