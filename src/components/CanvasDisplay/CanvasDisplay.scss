@@ -1,6 +1,12 @@
-@import '../../_Settings';
+@import "../../_Settings";
 
 .CanvasDisplay {
   flex: 1 0 auto;
   background-color: $secondaryBackgroundColor;
+
+  .Board {
+    position: absolute;
+    overflow: hidden;
+    cursor: crosshair;
+  }
 }

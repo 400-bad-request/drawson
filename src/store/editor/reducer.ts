@@ -4,6 +4,7 @@ import { Action } from '../Action'
 
 const initialState: EditorState = {
   compilationOutput: MockState,
+    codeEditorContent: ""
 }
 
 export function editorReducer(
@@ -17,6 +18,12 @@ export function editorReducer(
         compilationOutput: action.payload.compilationOutput,
       }
     }
+      case Action.UPDATE_CODE_EDITOR_CONTENT: {
+          return {
+              ...state,
+              codeEditorContent: action.payload.codeEditorContent,
+          }
+      }
     default:
       return state
   }

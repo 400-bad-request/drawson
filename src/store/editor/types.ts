@@ -1,7 +1,8 @@
 import { Action } from '../Action'
 
 export type EditorState = {
-  compilationOutput: any[]
+    codeEditorContent: string
+    compilationOutput: any[]
 }
 
 interface UpdateCompilationOutputAction {
@@ -11,4 +12,13 @@ interface UpdateCompilationOutputAction {
   }
 }
 
-export type EditorActionTypes = UpdateCompilationOutputAction
+interface UpdateCodeEditorContentAction {
+    type: typeof Action.UPDATE_CODE_EDITOR_CONTENT
+    payload: {
+        codeEditorContent: string
+    }
+}
+
+export type EditorActionTypes =
+    | UpdateCompilationOutputAction
+    | UpdateCodeEditorContentAction
