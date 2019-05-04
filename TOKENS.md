@@ -4,13 +4,15 @@ Tokens used in a programming language used to draw on canvas
 
 ## Tokens table
 
-| Token         | Possible values                                  | Definition                                                                                    |
-| ------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| Operator      | \*, -, +, /, in, =                               | Operator can be used between two values                                                       |
-| Identifier    | value1, value2                                   | A value can be bound to identifier                                                            |
-| Value         | 1, 2, 2137, "Hi there", "Hello world", "#BFFFFF" | is an integer or string defining some kind of value, like pixel length, color, string literal |
-| Instruction   | set, draw, clear, for                            | It is a control flow instruction. It defines what we actually want to do                      |
-| Comment Start | #                                                | Starts a comment so after that sign in line we can write anything                             |
+| Token           | Possible values                                  | Definition                                                                                                                    |
+| --------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| Operator        | \*, -, +, /, in, =                               | Operator can be used between two values                                                                                       |
+| Identifier      | value1, value2                                   | A value can be bound to identifier                                                                                            |
+| Value           | 1, 2, 2137, "Hi there", "Hello world", "#BFFFFF" | is an integer or string defining some kind of value, like pixel length, color, string literal                                 |
+| Instruction     | set, draw, clear, for                            | It is a control flow instruction. It defines what we actually want to do                                                      |
+| Comment Start   | #                                                | Starts a comment so after that sign in line we can write anything                                                             |
+| Constant object | rect, circle, ellipse, line                      | It is like an enum of objects we can draw                                                                                     |
+| code block      | tabulator indent                                 | tabulator indent of the same size means that we have a block of code, in blocks of code variables from for loop has its reach |
 
 ## Example snippets
 
@@ -54,3 +56,30 @@ clear myVar lineWidth color # clears only those passed as parameters
 
 Moim zdaniem te rzeczy kontekstowe możemy zrobić tak, że będą miały swoje defaultsy
 Możemy sobie je zrobić takimi predefiniowanymi wartościami
+
+Example output JSON
+It makes for our bridge between our language and rendering engine which is JS based
+
+```json
+[
+  {
+    "type": "circle",
+    "line_color": "#000000",
+    "line_thickness": 2,
+    "background_color": null,
+    "x": 50,
+    "y": 50,
+    "r": 20
+  },
+  {
+    "type": "rectangle",
+    "line_color": "#000000",
+    "line_thickness": 2,
+    "background_color": null,
+    "x": 50,
+    "y": 50,
+    "width": 40,
+    "height": 40
+  }
+]
+```
