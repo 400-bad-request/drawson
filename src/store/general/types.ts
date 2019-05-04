@@ -1,42 +1,16 @@
 import { Action } from '../Action'
+import {PopupType} from "../../data/PopupType";
 
 export type GeneralState = {
-  isImportPopupOpen: boolean
-  isExportPopupOpen: boolean
-  isOptionsPopupOpen: boolean
-  isAboutPopupOpen: boolean
+    activePopupType: PopupType
 }
 
-interface UpdateImportPopupStatusAction {
-  type: typeof Action.UPDATE_IMPORT_POPUP_STATUS
+interface UpdateActivePopupTypeAction {
+    type: typeof Action.UPDATE_ACTIVE_POPUP_TYPE
   payload: {
-    status: boolean
-  }
-}
-
-interface UpdateExportPopupStatusAction {
-  type: typeof Action.UPDATE_EXPORT_POPUP_STATUS
-  payload: {
-    status: boolean
-  }
-}
-
-interface UpdateOptionsPopupStatusAction {
-  type: typeof Action.UPDATE_OPTIONS_POPUP_STATUS
-  payload: {
-    status: boolean
-  }
-}
-
-interface UpdateAboutPopupStatusAction {
-  type: typeof Action.UPDATE_ABOUT_POPUP_STATUS
-  payload: {
-    status: boolean
+      activePopupType: PopupType
   }
 }
 
 export type GeneralActionTypes =
-  | UpdateImportPopupStatusAction
-  | UpdateExportPopupStatusAction
-  | UpdateOptionsPopupStatusAction
-  | UpdateAboutPopupStatusAction
+    | UpdateActivePopupTypeAction

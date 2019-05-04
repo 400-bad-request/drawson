@@ -1,38 +1,12 @@
 import { GeneralActionTypes } from './types'
 import { Action } from '../Action'
+import {PopupType} from "../../data/PopupType";
 
-export function updateImportPopupStatus(status: boolean): GeneralActionTypes {
+export function updateActivePopupType(activePopupType: PopupType): GeneralActionTypes {
   return {
-    type: Action.UPDATE_IMPORT_POPUP_STATUS,
+    type: Action.UPDATE_ACTIVE_POPUP_TYPE,
     payload: {
-      status,
-    },
-  }
-}
-
-export function updateExportPopupStatus(status: boolean): GeneralActionTypes {
-  return {
-    type: Action.UPDATE_EXPORT_POPUP_STATUS,
-    payload: {
-      status,
-    },
-  }
-}
-
-export function updateOptionsPopupStatus(status: boolean): GeneralActionTypes {
-  return {
-    type: Action.UPDATE_OPTIONS_POPUP_STATUS,
-    payload: {
-      status,
-    },
-  }
-}
-
-export function updateAboutPopupStatus(status: boolean): GeneralActionTypes {
-  return {
-    type: Action.UPDATE_ABOUT_POPUP_STATUS,
-    payload: {
-      status,
+      activePopupType,
     },
   }
 }
