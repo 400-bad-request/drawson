@@ -20,8 +20,15 @@ export class CanvasDisplayComponent extends React.Component<IProps, {}> {
         this.resizeCanvas();
     }
 
-    public componentDidUpdate(): void {
-        this.resizeCanvas()
+    public componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>): void {
+        if (this.props.width !== prevProps.width || this.props.height !== prevProps.height)
+            this.resizeCanvas();
+        else if (this.props.compilationOutput !== prevProps.compilationOutput)
+            this.drawEngine.updateContent(this.props.compilationOutput);
+    }
+
+    public componentWillUnmount(): void {
+        this.drawEngine.defuseListeners();
     }
 
     private resizeCanvas() {
