@@ -1,13 +1,13 @@
 import React from 'react'
 import './App.scss'
-import { NavigationBar } from './components/NavigationBar/NavigationBar'
-import RootComponent from './components/RootComponent/RootComponent'
+import {PopupLayer} from "./components/PopupLayer/PopupLayer";
+import {EditorLayer} from "./components/EditorLayer/EditorLayer";
 
 const App = () => {
   return (
     <div className="App">
-      <NavigationBar />
-      <RootComponent />
+        <EditorLayer/>
+        <PopupLayer/>
     </div>
   )
 }
