@@ -115,8 +115,26 @@ export class DrawEngine {
     }
 
     public drawGrid() {
-        DrawUtil.drawLine(this.canvas, {x: 0, y: this.anchor.y}, {x: this.width, y: this.anchor.y}, "#b2b2b2", 1);
-        DrawUtil.drawLine(this.canvas, {x: this.anchor.x, y: 0}, {x: this.anchor.x, y: this.height}, "#b2b2b2", 1);
+        const windowStartX = this.anchor.x % Settings.DEFAULT_GRID_STEP;
+        const windowEndX = windowStartX + this.width;
+        const windowStartY = this.anchor.y % Settings.DEFAULT_GRID_STEP;
+        const windowEndY = windowStartY + this.height;
+
+        let x = windowStartX;
+        let y = windowStartY;
+
+        while (x < windowEndX) {
+            DrawUtil.drawLine(this.canvas, {x: x, y: 0}, {x: x, y: this.height}, "#969696", 1);
+            x += Settings.DEFAULT_GRID_STEP;
+        }
+
+        while (y < windowEndY) {
+            DrawUtil.drawLine(this.canvas, {x: 0, y: y}, {x: this.width, y: y}, "#969696", 1);
+            y += Settings.DEFAULT_GRID_STEP;
+        }
+
+        DrawUtil.drawLine(this.canvas, {x: 0, y: this.anchor.y}, {x: this.width, y: this.anchor.y}, "#000000", 1);
+        DrawUtil.drawLine(this.canvas, {x: this.anchor.x, y: 0}, {x: this.anchor.x, y: this.height}, "#000000", 1);
     }
 
     public drawContent() {
@@ -125,6 +143,7 @@ export class DrawEngine {
                 switch (object.type) {
                     case "circle":
                         const point: IPoint = this.applyAnchorToPoint({x: object.x, y: object.y});
+                        DrawUtil.drawCircleWithFill(this.canvas, point, object.r, object.background_color);
                         DrawUtil.drawCircle(this.canvas, point, object.r, 0, 360, object.line_color, object.line_thickness);
                         break;
                     case "line":
@@ -139,6 +158,7 @@ export class DrawEngine {
                             width: object.width,
                             height: object.height
                         });
+                        DrawUtil.drawRectWithFill(this.canvas, rect, object.background_color);
                         DrawUtil.drawRect(this.canvas, rect, object.line_color, object.line_thickness);
                         break;
                 }
