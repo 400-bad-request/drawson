@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.scss'
-import {PopupLayer} from "./components/PopupLayer/PopupLayer";
+import {PopupLayer} from "./components/Popups/PopupLayer/PopupLayer";
 import {EditorLayer} from "./components/EditorLayer/EditorLayer";
 
 const App = () => {

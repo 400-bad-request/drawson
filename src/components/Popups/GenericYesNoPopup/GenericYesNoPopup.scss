@@ -1,0 +1,28 @@
+.GenericYesNoPopup {
+  align-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  .Content {
+    padding: 25px 40px;
+    align-self: stretch;
+    font-size: 14px;
+  }
+
+  .Footer {
+    padding: 0 40px 25px 40px;
+
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+
+    > div {
+      margin-left: 20px;
+    }
+  }
+}

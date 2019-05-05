@@ -9,7 +9,6 @@ interface IProps {
   key?: string
   label: string
   onClick?: () => any
-  rout?: string
   style?: React.CSSProperties
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import './NavigationBar.scss'
-import {UnderlineTextButton} from '../UnderlineTextButton/UnderlineTextButton'
+import {UnderlineTextButton} from '../Buttons/UnderlineTextButton/UnderlineTextButton'
 import {AppState} from '../../store'
 import {connect} from 'react-redux'
 import {PopupType} from "../../data/PopupType";

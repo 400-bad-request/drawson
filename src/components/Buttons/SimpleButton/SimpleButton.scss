@@ -1,0 +1,20 @@
+@import '../../../Settings';
+
+.SimpleButton {
+  position: relative;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 3px;
+  border: solid 1px $primaryButtonHoverColor;
+
+  &.fill {
+    background-color: $primaryButtonHoverColor;
+  }
+
+  &:hover {
+    transform: translate(0, -2px)
+  }
+}
