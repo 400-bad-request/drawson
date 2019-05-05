@@ -129,32 +129,6 @@ RIGHT_PARENTHESIS,
 INTEGER,
 NOT
 ```
----
-
-Command -> draw | set | clear | for
-
-Object -> RECT | CIRCLE | ELLIPSE | LINE
-
-Identifier -> [a-z]
-Identifier -> Value[a-zA-Z0-9]
-
-Number -> [0-9]*  
-
-String -> "[alphanumeric]"
-
-Value -> Number | String
-
-Set -> set Identifier Value
-
-Draw -> draw Object Arguments
-
-Clear -> clear
-
-A -> Identifier | Identifier A
- 
-Clear -> clear A
-
-For -> for Identifier in Number Number \n \tab Block 
 
 ## Useful Links
 

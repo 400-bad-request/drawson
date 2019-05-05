@@ -51,30 +51,20 @@ Tokens used in a programming language used to draw on canvas
 
 **Logical operator** - special symbol or word which connects two or more phrases of information. It is most often used to test whether a certain relationship between the phrases is true or false.
 
-| Token           | Possible values                                  | Definition                                                                                                                    |
-| --------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| Operator        | \*, -, +, /, in, =                               | Operator can be used between two values                                                                                       |
-| Identifier      | value1, value2                                   | A value can be bound to identifier                                                                                            |
-| Value           | 1, 2, 2137, "Hi there", "Hello world", "#BFFFFF" | is an integer or string defining some kind of value, like pixel length, color, string literal                                 |
-| Instruction     | set, draw, clear, for                            | It is a control flow instruction. It defines what we actually want to do                                                      |
-| Comment Start   | #                                                | Starts a comment so after that sign in line we can write anything                                                             |
-| Constant object | rect, circle, ellipse, line                      | It is like an enum of objects we can draw                                                                                     |
-| code block      | tabulator indent                                 | tabulator indent of the same size means that we have a block of code, in blocks of code variables from for loop has its reach |
-
 ## Example snippets
 
 ```
-set color "#000000"
-draw rect 10 10 50 50
-fill circle 10 10 25
-draw line 10 10 20 20
-clear
+set color "#000000";
+draw rect 10 10 50 50;
+fill circle 10 10 25;
+draw line 10 10 20 20;
+clear;
 
-set color "#FFFFFF"
+set color "#FFFFFF";
 clear # this clears the context so color line width and stuff
 
 # my idea of how to make a moveto and lineto
-set color "#666666"
+set color "#666666";
 # I think we can make sth like paretheses but optional
 draw line (10 10) (20 20) (30 30) (45 50) fill
 # so basivally we define points of our line and
@@ -82,18 +72,12 @@ draw line (10 10) (20 20) (30 30) (45 50) fill
 clear
 
 # example of loops
-set color "#000000"
-set lineWidth 12
+set color "#000000";
+val lineWidth = 12
 for el in 0 20 {
-    draw circle el / 2 el * 2 20 20
+    draw circle el / 2 el * 2 20 20;
 }
-clear
-
-# my guess is that we can actually ditch let keyword and use only set keyword
-# so that we will be operating only in global scope
-# so setting variable
-set myVar 12
-set SOME_CONST "#000FFF"
+clear;
 
 # clear behavior
 clear # clears all stuff from scope so all variables
