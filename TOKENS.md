@@ -4,6 +4,51 @@ Tokens used in a programming language used to draw on canvas
 
 ## Tokens table
 
+| #  |Value         | Type                       | Description                                                     |
+| ---|--------------|----------------------------|-----------------------------------------------------------------|
+| 1  | +            |Operator (binary arithmetic)|Addition                                                         |
+| 2  | -            |Operator (binary arithmetic)|Subtraction                                                      |
+| 3  | *            |Operator (binary arithmetic)|Multiplication                                                   |
+| 4  | /            |Operator (binary arithmetic)|Division                                                         |
+| 5  | \>           |Operator (binary relational)|Greater then                                                     |
+| 6  | \<           |Operator (binary relational)|Less then                                                        |
+| 7  | \>=          |Operator (binary relational)|Greater then or equal to                                         |
+| 8  | \<=          |Operator (binary relational)|Less then or equal to                                            |
+| 9  | ==           |Operator (binary relational)|Equal to                                                         |
+| 10 | !=           |Operator (binary relational)|Not equal to                                                     |
+| 11 | &&           |Operator (binary logical)   |Logical AND                                                      |
+| 12 | &#124;&#124; |Operator (binary logical)   |Logical AND                                                      |
+| 13 | !            |Operator (unary logical)    |Logical NOT                                                      |
+| 14 | =            |Operator (binary assignment)|Simple assignment                                                |
+| 14 | (            |Special symbol              |Left parenthesis                                                 |
+| 15 | )            |Special symbol              |Right parenthesis                                                |
+| 16 | {            |Special symbol              |Left curly bracket                                               |
+| 17 | }            |Special symbol              |Right curly bracket                                              |
+| 18 | #            |Special symbol              |Begins and finishes the comment                                  |
+| 19 | [space]      |Special symbol              |Separates the tokens                                             |
+| 20 | val          |Keyword                     |Begins the definition of a variable                              |
+| 21 | set          |Keyword (operation)         |Allows to define the properties of drawn objects                 |
+| 22 | clear        |Keyword (operation)         |Clears defined properties                                        |
+| 23 | draw         |Keyword (operation)         |Begins the definition of the object you want to draw             |
+| 24 | fill         |Keyword (operation)         |Begins the definition of the object you want to fill with color  |
+| 25 | color        |Keyword (property)          |Defines colour of the drawn line                                 |
+| 26 | paint        |Keyword (property)          |Defines background colour of drawn shape                         |
+| 27 | thickness    |Keyword (property)          |Defines thickness of the drawn line                              |
+| 28 | circle       |Keyword (shape)             |Circle                                                           |
+| 29 | rect         |Keyword (shape)             |Rect                                                             |
+| 30 | line         |Keyword (shape)             |Line                                                             |
+| 31 | for          |Keyword                     |Begins the definition of the for loop                            |
+| 32 | in           |Keyword                     |Allows the definition of range of the for loop                   |
+| 33 | [a-z, A-Z]+  |Identifier                  |Allows the definition of variables                               |
+| 34 | [0-9]+       |Integer                     |It can be assigned to a variable                                 |
+| 35 | #[0-9]{6}    |Color value                 |It can be set as color property value                            |
+
+**Arithmetic operators** - take numerical values (either literals or variables) as their operands and return a single numerical value.
+
+**Relational operators** - are used to find the relation between two variables. i.e. to compare the values of two variables.
+
+**Logical operator** - special symbol or word which connects two or more phrases of information. It is most often used to test whether a certain relationship between the phrases is true or false.
+
 | Token           | Possible values                                  | Definition                                                                                                                    |
 | --------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | Operator        | \*, -, +, /, in, =                               | Operator can be used between two values                                                                                       |
@@ -19,8 +64,7 @@ Tokens used in a programming language used to draw on canvas
 ```
 set color "#000000"
 draw rect 10 10 50 50
-draw circle 10 10 25 fill
-draw ellipse 15 15 14 13 fill
+fill circle 10 10 25 fill
 draw line 10 10 20 20
 clear
 
@@ -83,3 +127,5 @@ It makes for our bridge between our language and rendering engine which is JS ba
   }
 ]
 ```
+
+## Useful links
