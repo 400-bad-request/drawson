@@ -18,22 +18,30 @@ Drawson {
     | Comment
 
   WhileLoop 
-    = "while" leftParentheses ConditionalStatement rightParentheses LoopBody
+    = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
+  
+  whileKeyword = "while"
 
   ForLoop 
-    = "for" identifier "in" ArithmeticStatement ArithmeticStatement LoopBody
+    = forKeyword identifier inKeyword ArithmeticStatement ArithmeticStatement LoopBody
+
+  forKeyword = "for"
+  inKeyword = "in"
 
   LoopBody 
     = leftCurlyBrace StatementList rightCurlyBrace
 
   DefinitionStatement 
-    = "val" identifier terminator
+    = variableKeyword identifier terminator
 
   AssignmentStatement
     = identifier "=" ArithmeticStatement terminator
 
   DefinitionWithAssignmentStatement
-    = "val" AssignmentStatement
+    = variableKeyword AssignmentStatement
+
+  variableKeyword
+    = "val"
 
   ClearStatement 
     = "clear" terminator
@@ -46,19 +54,22 @@ Drawson {
     | "paint" colorValue
     | "thickness" ArithmeticStatement
       
-  DrawStatement
-    = "draw" ObjectDefinition terminator
+  DrawStatement = "draw" ObjectDefinition terminator
 
-  FillStatement
-    = "fill" FillableObjectDefinition terminator
+  FillStatement = "fill" FillableObjectDefinition terminator
 
   ObjectDefinition
     = FillableObjectDefinition
-    | "line" ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- line_definition
+    | lineObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- line_definition
+  
+  lineObjectKeyword = "line"
 
   FillableObjectDefinition
-    = "circle" ArithmeticStatement ArithmeticStatement ArithmeticStatement -- circle_definition
-    | "rect" ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- rect_definition
+    = circleObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement -- circle_definition
+    | rectObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- rect_definition
+
+  circleObjectKeyword = "circle"
+  rectObjectKeyword = "rect"
   
   ConditionalStatement 
     = not ConditionalStatement -- negation
@@ -73,9 +84,15 @@ Drawson {
     | leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
     | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
 
+  Comment = commentStart notEndOfComment* commentEnd
+
+  commentStart = "/*"
+  notEndOfComment= ~commentEnd any
+  commentEnd = "*/"
+
   arithmeticOperator 
     = "+"
-    | minus
+    | "-"
     | "*"
     | "/"
 
@@ -91,40 +108,27 @@ Drawson {
     | ">="
     | "<="
 
-  identifier 
-    = lower alnum*
+  identifier = lower alnum*
 
-  colorValue 
-    = "#" alnum alnum alnum alnum alnum alnum
-
-  minus
-    = "-"
-
-  Comment
-    = "/*" notEndOfComment* "*/"
-
-  notEndOfComment
-    = ~"*/" any
+  colorValue = "#" alnum alnum alnum alnum alnum alnum
   
-  leftCurlyBrace 
-    = "{"
+  leftCurlyBrace = "{"
 
-  rightCurlyBrace 
-    = "}"
+  rightCurlyBrace = "}"
 
-  leftParentheses 
-    = "("
+  leftParentheses = "("
 
-  rightParentheses 
-    = ")"
+  rightParentheses = ")"
 
   integer 
-    = "1".."9" digit* -- number
+    = nonZeroDigit digit* -- number
     | "0" -- zero
 
-  not 
-    = "!"
+  nonZeroDigit = ~"0" digit
 
-  terminator
-    = ";"
+  not = "!"
+
+  minus = "-"
+
+  terminator = ";"
 }
