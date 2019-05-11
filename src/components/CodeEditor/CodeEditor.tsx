@@ -6,42 +6,54 @@ import 'brace/theme/monokai';
 import { AppState } from '../../store';
 import { connect } from 'react-redux';
 import { updateCodeEditorContent } from '../../store/editor/actionCreators';
+import { Compilator } from '../../utils/Compilator';
 
-interface IProps {
+interface Props {
   width: number;
   height: number;
   codeEditorContent: string;
   updateCodeEditorContent: (codeEditorContent: string) => any;
 }
 
-let timeout;
+let timeout: any;
 
-export const CodeEditorComponent = (props: IProps) => {
+const compile = (code: string) => {
+  const match = Compilator.grammar.match(code);
+  if (match.succeeded()) {
+    console.log('code compiled properly');
+  } else {
+    console.log('compilation failed');
+  }
+};
+
+export const CodeEditorComponent: FunctionComponent<Props> = ({
+  width,
+  height,
+  codeEditorContent,
+  updateCodeEditorContent,
+}) => {
   const onChange = (newValue: string) => {
-    props.updateCodeEditorContent(newValue);
-    deferredCompilation();
+    updateCodeEditorContent(newValue);
+    deferredCompilation(newValue);
   };
 
-  const deferredCompilation = () => {
+  const deferredCompilation = (code: string) => {
+    const cmp = () => compile(code);
     if (timeout) {
       clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        console.log('test');
-      }, 3000);
+      timeout = setTimeout(cmp, 1500);
     } else {
-      timeout = setTimeout(() => {
-        console.log('test');
-      }, 3000);
+      timeout = setTimeout(cmp, 1500);
     }
   };
 
   return (
     <AceEditor
       theme={'github'}
-      width={props.width + 'px'}
-      height={props.height + 'px'}
+      width={width + 'px'}
+      height={height + 'px'}
       fontSize={16}
-      value={props.codeEditorContent}
+      value={codeEditorContent}
       onChange={onChange}
     />
   );
