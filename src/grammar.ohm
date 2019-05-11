@@ -1,103 +1,85 @@
 Drawson {
-  START 
-    = STATEMENT_LIST
+  Start
+    = StatementList
 
-  STATEMENT_LIST 
-    = STATEMENT*
+  StatementList 
+    = Statement*
       
-  STATEMENT 
-    =WHILE_LOOP
-    | FOR_LOOP
-    | CLEAR_STATEMENT
-    | SET_STATEMENT
-    | DRAW_LINE
-    | DRAW_CIRCLE
-    | DRAW_RECT
-    | FILL_RECT
-    | FILL_CIRCLE
-    | DEFINITION_STATEMENT
-    | ASSIGNMENT_STATEMENT
+  Statement 
+    = WhileLoop
+    | ForLoop
+    | ClearStatement
+    | SetStatement
+    | DrawStatement
+    | FillStatement
+    | DefinitionStatement
+    | AssignmentStatement
+    | Comment
 
-  WHILE_LOOP 
-    = "while" LEFT_PARENTHESIS CONDITIONAL_STATEMENT RIGHT_PARENTHESIS LOOP_BODY
+  WhileLoop 
+    = "while" leftParentheses ConditionalStatement rightParentheses LoopBody
 
-  FOR_LOOP 
-    = "for" IDENTIFIER "in" ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT LOOP_BODY
+  ForLoop 
+    = "for" identifier "in" ArithmeticStatement ArithmeticStatement LoopBody
 
-  LOOP_BODY 
-    = LEFT_CURLY STATEMENT_LIST RIGHT_CURLY
+  LoopBody 
+    = leftCurlyBrace StatementList rightCurlyBrace
 
-  DEFINITION_STATEMENT 
-    = "val" IDENTIFIER ";"
+  DefinitionStatement 
+    = "val" identifier terminator
 
-  ASSIGNMENT_STATEMENT
-    = IDENTIFIER "=" ARITHMETIC_STATEMENT ";"
+  AssignmentStatement
+    = identifier "=" ArithmeticStatement terminator
 
-  CLEAR_STATEMENT 
-    = "clear"";"
+  ClearStatement 
+    = "clear" terminator
 
-  SET_STATEMENT 
-    = "set" SET_DEFINITION ";"
+  SetStatement 
+    = "set" SetDefinition terminator
 
-  SET_DEFINITION 
-    = "color" COLOR_VALUE
-    | "paint" COLOR_VALUE
-    | "thickness" ARITHMETIC_STATEMENT
+  SetDefinition 
+    = "color" colorValue
+    | "paint" colorValue
+    | "thickness" ArithmeticStatement
       
-  DRAW_LINE
-    = OPERATION_DRAW LINE_OBJECT_DEFINITION ";"
+  DrawStatement
+    = "draw" ObjectDefinition terminator
 
-  DRAW_CIRCLE
-    = OPERATION_DRAW CIRCLE_OBJECT_DEFINITION ";"
+  FillStatement
+    = "fill" FillableObjectDefinition terminator
 
-  DRAW_RECT
-    = OPERATION_DRAW RECT_OBJECT_DEFINITION ";"
+  ObjectDefinition
+    = FillableObjectDefinition
+    | "line" ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- line_definition
 
-  FILL_RECT
-    = OPERATION_FILL RECT_OBJECT_DEFINITION ";"
-
-  FILL_CIRCLE
-    = OPERATION_FILL CIRCLE_OBJECT_DEFINITION ";"
-      
-  CIRCLE_OBJECT_DEFINITION
-    = "circle" ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT
-
-  RECT_OBJECT_DEFINITION
-	= "rect" ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT
-
-  LINE_OBJECT_DEFINITION
-    = "line" ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT
-
-  OPERATION_DRAW 
-    = "draw"
-
-  OPERATION_FILL 
-    = "fill"
+  FillableObjectDefinition
+    = "circle" ArithmeticStatement ArithmeticStatement ArithmeticStatement -- circle_definition
+    | "rect" ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- rect_definition
   
-  CONDITIONAL_STATEMENT 
-    = NOT CONDITIONAL_STATEMENT -- negation
-    | CONDITIONAL_STATEMENT LOGICAL_OPERATOR CONDITIONAL_STATEMENT -- operator_join
-    | LEFT_PARENTHESIS CONDITIONAL_STATEMENT RIGHT_PARENTHESIS -- contidion_parentheses
-    | ARITHMETIC_STATEMENT RELATIONAL_OPERATOR ARITHMETIC_STATEMENT -- arithmetic_condition
+  ConditionalStatement 
+    = not ConditionalStatement -- negation
+    | ConditionalStatement logicalOperator ConditionalStatement -- operator_join
+    | leftParentheses ConditionalStatement rightParentheses -- contidion_parentheses
+    | ArithmeticStatement relationalOperator ArithmeticStatement -- arithmetic_condition
 
-  ARITHMETIC_STATEMENT 
-    = INTEGER
-    | IDENTIFIER
-    | LEFT_PARENTHESIS ARITHMETIC_STATEMENT RIGHT_PARENTHESIS -- arithmetic_parentheses
-    | LEFT_PARENTHESIS MINUS ARITHMETIC_STATEMENT RIGHT_PARENTHESIS -- minus_arithmetic_parentheses
-    | ARITHMETIC_STATEMENT ARITHMETIC_OPERATOR ARITHMETIC_STATEMENT -- arithmetic_operation
+  ArithmeticStatement 
+    = integer
+    | identifier
+    | leftParentheses ArithmeticStatement rightParentheses -- arithmetic_parentheses
+    | leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
+    | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
 
-  ARITHMETIC_OPERATOR 
+  arithmeticOperator 
     = "+"
-    | "-"
+    | minus
     | "*"
     | "/"
 
-  LOGICAL_OPERATOR 
+  logicalOperator 
     = "&&"
     | "||"
 
-  RELATIONAL_OPERATOR 
+  relationalOperator 
     = "=="
     | "!="
     | ">"
@@ -105,36 +87,40 @@ Drawson {
     | ">="
     | "<="
 
-  IDENTIFIER 
+  identifier 
     = lower alnum*
 
-  COLOR_VALUE 
+  colorValue 
     = "#" alnum alnum alnum alnum alnum alnum
 
-  MINUS 
+  minus
     = "-"
 
-  COMMENT 
-    = "#" NOT_HASH* "#"
-  
-  NOT_HASH
-    = ~"#" any
+  Comment
+    = "/*" notEndOfComment* "*/"
 
-  LEFT_CURLY 
+  notEndOfComment
+    = ~"*/" any
+  
+  leftCurlyBrace 
     = "{"
 
-  RIGHT_CURLY 
+  rightCurlyBrace 
     = "}"
 
-  LEFT_PARENTHESIS 
+  leftParentheses 
     = "("
 
-  RIGHT_PARENTHESIS 
+  rightParentheses 
     = ")"
 
-  INTEGER 
-    = "1".."9" digit*
-    
-  NOT 
+  integer 
+    = "1".."9" digit* -- number
+    | "0" -- zero
+
+  not 
     = "!"
+
+  terminator
+    = ";"
 }
