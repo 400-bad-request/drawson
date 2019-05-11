@@ -14,6 +14,7 @@ Drawson {
     | FillStatement
     | DefinitionStatement
     | AssignmentStatement
+    | DefinitionWithAssignmentStatement
     | Comment
 
   WhileLoop 
@@ -30,6 +31,9 @@ Drawson {
 
   AssignmentStatement
     = identifier "=" ArithmeticStatement terminator
+
+  DefinitionWithAssignmentStatement
+    = "val" AssignmentStatement
 
   ClearStatement 
     = "clear" terminator
