@@ -7,175 +7,168 @@ Start
 
 ## Productions
 ```
-Start
-    = StatementList
+Start = StatementList
 
-  StatementList 
-    = Statement*
-      
-  Statement 
-    = WhileLoop
-    | ForLoop
-    | ClearStatement
-    | SetStatement
-    | DrawStatement
-    | FillStatement
-    | DefinitionStatement
-    | AssignmentStatement
-    | DefinitionWithAssignmentStatement
-    | Comment
+StatementList = Statement*
+    
+Statement 
+= WhileLoop
+| ForLoop
+| ClearStatement
+| SetStatement
+| DrawStatement
+| FillStatement
+| DefinitionStatement
+| AssignmentStatement
+| DefinitionWithAssignmentStatement
+| Comment
 
-  WhileLoop 
-    = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
-  
-  whileKeyword = "while"
+WhileLoop = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
 
-  ForLoop 
-    = forKeyword identifier inKeyword ArithmeticStatement ArithmeticStatement LoopBody
+whileKeyword = "while"
 
-  forKeyword = "for"
-  inKeyword = "in"
+ForLoop = forKeyword identifier inKeyword ArithmeticStatement ArithmeticStatement LoopBody
 
-  LoopBody 
-    = leftCurlyBrace StatementList rightCurlyBrace
+forKeyword = "for"
+inKeyword = "in"
 
-  DefinitionStatement 
-    = variableKeyword identifier terminator
+LoopBody = leftCurlyBrace StatementList rightCurlyBrace
 
-  AssignmentStatement
-    = identifier "=" ArithmeticStatement terminator
+DefinitionStatement = variableKeyword identifier terminator
 
-  DefinitionWithAssignmentStatement
-    = variableKeyword AssignmentStatement
+AssignmentStatement = identifier "=" ArithmeticStatement terminator
 
-  variableKeyword
-    = "val"
+DefinitionWithAssignmentStatement = variableKeyword AssignmentStatement
 
-  ClearStatement 
-    = "clear" terminator
+variableKeyword = "let"
 
-  SetStatement 
-    = "set" SetDefinition terminator
+ClearStatement = "clear" terminator
 
-  SetDefinition 
-    = "color" colorValue
-    | "paint" colorValue
-    | "thickness" ArithmeticStatement
-      
-  DrawStatement = "draw" ObjectDefinition terminator
+SetStatement = "set" SetDefinition terminator
 
-  FillStatement = "fill" FillableObjectDefinition terminator
+SetDefinition 
+= "color" colorValue
+| "paint" colorValue
+| "thickness" ArithmeticStatement
+    
+DrawStatement = "draw" ObjectDefinition terminator
 
-  ObjectDefinition
-    = FillableObjectDefinition
-    | lineObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- line_definition
-  
-  lineObjectKeyword = "line"
+FillStatement = "fill" FillableObjectDefinition terminator
 
-  FillableObjectDefinition
-    = circleObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement -- circle_definition
-    | rectObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- rect_definition
+ObjectDefinition
+= FillableObjectDefinition
+| lineObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- line_definition
 
-  circleObjectKeyword = "circle"
-  rectObjectKeyword = "rect"
-  
-  ConditionalStatement 
-    = not ConditionalStatement -- negation
-    | ConditionalStatement logicalOperator ConditionalStatement -- operator_join
-    | leftParentheses ConditionalStatement rightParentheses -- contidion_parentheses
-    | ArithmeticStatement relationalOperator ArithmeticStatement -- arithmetic_condition
+lineObjectKeyword = "line"
 
-  ArithmeticStatement 
-    = integer
-    | identifier
-    | leftParentheses ArithmeticStatement rightParentheses -- arithmetic_parentheses
-    | leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
-    | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
+FillableObjectDefinition
+= circleObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement -- circle_definition
+| rectObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- rect_definition
 
-  Comment = commentStart notEndOfComment* commentEnd
+circleObjectKeyword = "circle"
+rectObjectKeyword = "rect"
 
-  commentStart = "/*"
-  notEndOfComment= ~commentEnd any
-  commentEnd = "*/"
+ConditionalStatement 
+= not ConditionalStatement -- negation
+| ConditionalStatement logicalOperator ConditionalStatement -- operator_join
+| leftParentheses ConditionalStatement rightParentheses -- contidion_parentheses
+| ArithmeticStatement relationalOperator ArithmeticStatement -- arithmetic_condition
 
-  arithmeticOperator 
-    = "+"
-    | "-"
-    | "*"
-    | "/"
+ArithmeticStatement 
+= integer
+| identifier
+| leftParentheses ArithmeticStatement rightParentheses -- arithmetic_parentheses
+| leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
+| ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
 
-  logicalOperator 
-    = "&&"
-    | "||"
+Comment = commentStart notEndOfComment* commentEnd
+commentStart = "/*"
+notEndOfComment= ~commentEnd any
+commentEnd = "*/"
 
-  relationalOperator 
-    = "=="
-    | "!="
-    | ">"
-    | "<"
-    | ">="
-    | "<="
+arithmeticOperator 
+= "+"
+| "-"
+| "*"
+| "/"
 
-  identifier = lower alnum*
+logicalOperator 
+= "&&"
+| "||"
 
-  colorValue = "#" alnum alnum alnum alnum alnum alnum
-  
-  leftCurlyBrace = "{"
+relationalOperator 
+= "=="
+| "!="
+| ">"
+| "<"
+| ">="
+| "<="
 
-  rightCurlyBrace = "}"
+identifier = lower alnum*
 
-  leftParentheses = "("
+colorValue = "#" alnum alnum alnum alnum alnum alnum
 
-  rightParentheses = ")"
+leftCurlyBrace = "{"
 
-  integer 
-    = nonZeroDigit digit* -- number
-    | "0" -- zero
+rightCurlyBrace = "}"
 
-  nonZeroDigit = ~"0" digit
+leftParentheses = "("
 
-  not = "!"
+rightParentheses = ")"
 
-  minus = "-"
+integer 
+  = nonZeroDigit digit* -- number
+  | "0" -- zero
 
-  terminator = ";"
-}
+nonZeroDigit = ~"0" digit
+
+not = "!"
+
+minus = "-"
+
+terminator = ";"
+
 ```
 
 ## Nonterminal symbols
 ```
-START,
-STATEMENT_LIST,
-STATEMENT,
-WHILE_LOOP,
-FOR_LOOP,
-LOOP_BODY,
-DEFINITION_STATEMENT,
-ASSIGNMENT_STATEMENT,
-CLEAR_STATEMENT,
-SET_STATEMENT,
-SET_DEFINITION,
-OPERATION_STATEMENT,
-FILLABLE_OBJECT_DEFINITION,
-OBJECT_DEFINITION,
-OPERATION,
-OPERATION_DRAW,
-OPERATION_FILL,
-CONDITIONAL_STATEMENT,
-ARITHMETIC_STATEMENT,
-ARITHMETIC_OPERATOR,
-LOGICAL_OPERATOR,
-RELATIONAL_OPERATOR,
-IDENTIFIER,
-COLOR_VALUE,
-MINUS,
-COMMENT,
-LEFT_CURLY,
-RIGHT_CURLY,
-LEFT_PARENTHESIS,
-RIGHT_PARENTHESIS,
-INTEGER,
-NOT
+Start,
+StatementList,
+Statement,
+WhileLoop
+ForLoop
+ClearStatement
+SetStatement
+DrawStatement
+FillStatement
+DefinitionStatement
+AssignmentStatement
+DefinitionWithAssignmentStatement
+Comment
+commentStart
+notEndOfComment
+commentEnd
+variableKeyword
+SetDefinition
+ObjectDefinition
+FillableObjectDefinition
+lineObjectKeyword
+circleObjectKeyword
+rectObjectKeyword
+arithmeticOperator
+logicalOperator
+relationalOperator
+identifier,
+colorValue,
+leftCurlyBrace,
+rightCurlyBrace,
+leftParentheses,
+rightParentheses,
+integer,
+nonZeroDigit,
+not,
+minus,
+terminator
 ```
 
 ## Useful Links

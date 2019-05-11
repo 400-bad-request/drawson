@@ -1,9 +1,7 @@
 Drawson {
-  Start
-    = StatementList
+  Start = StatementList
 
-  StatementList 
-    = Statement*
+  StatementList = Statement*
       
   Statement 
     = WhileLoop
@@ -17,37 +15,28 @@ Drawson {
     | DefinitionWithAssignmentStatement
     | Comment
 
-  WhileLoop 
-    = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
+  WhileLoop = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
   
   whileKeyword = "while"
 
-  ForLoop 
-    = forKeyword identifier inKeyword ArithmeticStatement ArithmeticStatement LoopBody
+  ForLoop = forKeyword identifier inKeyword ArithmeticStatement ArithmeticStatement LoopBody
 
   forKeyword = "for"
   inKeyword = "in"
 
-  LoopBody 
-    = leftCurlyBrace StatementList rightCurlyBrace
+  LoopBody = leftCurlyBrace StatementList rightCurlyBrace
 
-  DefinitionStatement 
-    = variableKeyword identifier terminator
+  DefinitionStatement = variableKeyword identifier terminator
 
-  AssignmentStatement
-    = identifier "=" ArithmeticStatement terminator
+  AssignmentStatement = identifier "=" ArithmeticStatement terminator
 
-  DefinitionWithAssignmentStatement
-    = variableKeyword AssignmentStatement
+  DefinitionWithAssignmentStatement = variableKeyword AssignmentStatement
 
-  variableKeyword
-    = "let"
+  variableKeyword = "let"
 
-  ClearStatement 
-    = "clear" terminator
+  ClearStatement = "clear" terminator
 
-  SetStatement 
-    = "set" SetDefinition terminator
+  SetStatement = "set" SetDefinition terminator
 
   SetDefinition 
     = "color" colorValue
@@ -85,7 +74,6 @@ Drawson {
     | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
 
   Comment = commentStart notEndOfComment* commentEnd
-
   commentStart = "/*"
   notEndOfComment= ~commentEnd any
   commentEnd = "*/"
