@@ -1,107 +1,145 @@
-# Gramatyka
-
-Nie wiem jak opisać alfabet terminalny i nieterminalny w tym wypadku, ale produkcje będą w stylu jak poniżej
+# Grammar
 
 ## Start symbol
 ```
-START
+Start
 ```
 
 ## Productions
 ```
-START : STATEMENT_LIST;
+Start
+    = StatementList
 
-STATEMENT_LIST : STATEMENT STATEMENT_LIST 
-    | EPS
-    ;
-    
-STATEMENT : WHILE_LOOP
-    | FOR_LOOP
-    | CLEAR_STATEMENT
-    | SET_STATEMENT
-    | OPERATION_STATEMENT
-    | DEFINITION_STATEMENT
-    | ASSIGNMENT_STATEMENT
-    ;
+  StatementList 
+    = Statement*
+      
+  Statement 
+    = WhileLoop
+    | ForLoop
+    | ClearStatement
+    | SetStatement
+    | DrawStatement
+    | FillStatement
+    | DefinitionStatement
+    | AssignmentStatement
+    | DefinitionWithAssignmentStatement
+    | Comment
 
-WHILE_LOOP : 'while' LEFT_PARENTHESIS CONDITIONAL_STATEMENT RIGHT_PARENTHESIS LOOP_BODY ;
+  WhileLoop 
+    = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
+  
+  whileKeyword = "while"
 
-FOR_LOOP : 'for' IDENTIFIER 'in' ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT LOOP_BODY ;
+  ForLoop 
+    = forKeyword identifier inKeyword ArithmeticStatement ArithmeticStatement LoopBody
 
-LOOP_BODY : LEFT_CURLY STATEMENT_LIST RIGHT_CURLY ;
+  forKeyword = "for"
+  inKeyword = "in"
 
-DEFINITION_STATEMENT : 'val' IDENTIFIER ';' ;
+  LoopBody 
+    = leftCurlyBrace StatementList rightCurlyBrace
 
-ASSIGNMENT_STATEMENT : IDENTIFIER '=' ARITHMETIC_STATEMENT ';' ;
+  DefinitionStatement 
+    = variableKeyword identifier terminator
 
-CLEAR_STATEMENT : 'clear' ';' ;
+  AssignmentStatement
+    = identifier "=" ArithmeticStatement terminator
 
-SET_STATEMENT : 'set' SET_DEFINITION ';' ;
+  DefinitionWithAssignmentStatement
+    = variableKeyword AssignmentStatement
 
-SET_DEFINITION : 'color' COLOR_VALUE
-    | 'paint' COLOR_VALUE
-    | 'thickness' ARITHMETIC_STATEMENT
-    ;
-    
-OPERATION_STATEMENT : OPERATION_DRAW OBJECT_DEFINITION ';' 
-    | OPERATION_FILL FILLABLE_OBJECT_DEFINITION ';'
-    ;
-    
-FILLABLE_OBJECT_DEFINITION : 'circle' ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT
-    | 'rect' ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT
-    ;
+  variableKeyword
+    = "val"
 
-OBJECT_DEFINITION : FILLABLE_OBJECT_DEFINITION
-    | 'line' ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT ARITHMETIC_STATEMENT
-    ;
+  ClearStatement 
+    = "clear" terminator
 
-OPERATION_DRAW : 'draw'
-    ;
+  SetStatement 
+    = "set" SetDefinition terminator
 
-OPERATION_FILL : 'fill'
-    ;
+  SetDefinition 
+    = "color" colorValue
+    | "paint" colorValue
+    | "thickness" ArithmeticStatement
+      
+  DrawStatement = "draw" ObjectDefinition terminator
 
-CONDITIONAL_STATEMENT : NOT CONDITIONAL_STATEMENT
-    | CONDITIONAL_STATEMENT LOGICAL_OPERATOR CONDITIONAL_STATEMENT
-    | LEFT_PARENTHESIS CONDITIONAL_STATEMENT RIGHT_PARENTHESIS
-    | ARITHMETIC_STATEMENT RELATIONAL_OPERATOR ARITHMETIC_STATEMENT
-    ;
+  FillStatement = "fill" FillableObjectDefinition terminator
 
-ARITHMETIC_STATEMENT : INTEGER
-    | IDENTIFIER
-    | LEFT_PARENTHESIS ARITHMETIC_STATEMENT RIGHT_PARENTHESIS
-    | LEFT_PARENTHESIS MINUS ARITHMETIC_STATEMENT RIGHT_PARENTHESIS
-    | ARITHMETIC_STATEMENT ARITHMETIC_OPERATOR ARITHMETIC_STATEMENT
-    ;
+  ObjectDefinition
+    = FillableObjectDefinition
+    | lineObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- line_definition
+  
+  lineObjectKeyword = "line"
 
-ARITHMETIC_OPERATOR : '+'
-    | '-'
-    | '*'
-    | '/'
-    ;
+  FillableObjectDefinition
+    = circleObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement -- circle_definition
+    | rectObjectKeyword ArithmeticStatement ArithmeticStatement ArithmeticStatement ArithmeticStatement -- rect_definition
 
-LOGICAL_OPERATOR : '&&'
-    | '||'
-    ;
+  circleObjectKeyword = "circle"
+  rectObjectKeyword = "rect"
+  
+  ConditionalStatement 
+    = not ConditionalStatement -- negation
+    | ConditionalStatement logicalOperator ConditionalStatement -- operator_join
+    | leftParentheses ConditionalStatement rightParentheses -- contidion_parentheses
+    | ArithmeticStatement relationalOperator ArithmeticStatement -- arithmetic_condition
 
-RELATIONAL_OPERATOR : '=='
-    | '!='
-    | '>'
-    | '<'
-    | '>='
-    | '<='
-    ;
+  ArithmeticStatement 
+    = integer
+    | identifier
+    | leftParentheses ArithmeticStatement rightParentheses -- arithmetic_parentheses
+    | leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
+    | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
 
-IDENTIFIER : [a-z | A-Z][a-z | A-Z | 0-9]* ;
-COLOR_VALUE : #[0-9 &#124; a-f]{6} ;
-MINUS : '-' ;
-COMMENT : #[^#]*# ;
-LEFT_CURLY : '{' ;
-RIGHT_CURLY : '}' ;
-LEFT_PARENTHESIS : '(' ;
-RIGHT_PARENTHESIS : ')' ;
-INTEGER : [1-9][0-9]* ;
-NOT : '!' ;
+  Comment = commentStart notEndOfComment* commentEnd
+
+  commentStart = "/*"
+  notEndOfComment= ~commentEnd any
+  commentEnd = "*/"
+
+  arithmeticOperator 
+    = "+"
+    | "-"
+    | "*"
+    | "/"
+
+  logicalOperator 
+    = "&&"
+    | "||"
+
+  relationalOperator 
+    = "=="
+    | "!="
+    | ">"
+    | "<"
+    | ">="
+    | "<="
+
+  identifier = lower alnum*
+
+  colorValue = "#" alnum alnum alnum alnum alnum alnum
+  
+  leftCurlyBrace = "{"
+
+  rightCurlyBrace = "}"
+
+  leftParentheses = "("
+
+  rightParentheses = ")"
+
+  integer 
+    = nonZeroDigit digit* -- number
+    | "0" -- zero
+
+  nonZeroDigit = ~"0" digit
+
+  not = "!"
+
+  minus = "-"
+
+  terminator = ";"
+}
 ```
 
 ## Nonterminal symbols

@@ -41,7 +41,7 @@ Drawson {
     = variableKeyword AssignmentStatement
 
   variableKeyword
-    = "val"
+    = "let"
 
   ClearStatement 
     = "clear" terminator
