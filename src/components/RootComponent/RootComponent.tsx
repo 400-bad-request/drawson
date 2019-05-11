@@ -6,7 +6,7 @@ import { CodeDisplay } from '../CodeDisplay/CodeDisplay'
 import { ResizeBar } from '../ResizeBar/ResizeBar'
 import { CanvasDisplay } from '../CanvasDisplay/CanvasDisplay'
 import {Settings} from "../../settings/Settings";
-import BarType from "../../data/BarType";
+import BarType from "../../utils/types/BarType";
 
 let resizingVertical = false
 let resizingHorizontal = false

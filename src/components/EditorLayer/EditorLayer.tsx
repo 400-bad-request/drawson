@@ -2,7 +2,7 @@ import React from 'react'
 import './EditorLayer.scss'
 import {NavigationBar} from "../NavigationBar/NavigationBar";
 import RootComponent from "../RootComponent/RootComponent";
-import {PopupType} from "../../data/PopupType";
+import {PopupType} from "../../utils/types/PopupType";
 import classNames from "classnames";
 import {AppState} from "../../store";
 import {connect} from "react-redux";

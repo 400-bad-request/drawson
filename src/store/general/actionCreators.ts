@@ -1,6 +1,6 @@
 import { GeneralActionTypes } from './types'
 import { Action } from '../Action'
-import {PopupType} from "../../data/PopupType";
+import {PopupType} from "../../utils/types/PopupType";
 
 export function updateActivePopupType(activePopupType: PopupType): GeneralActionTypes {
   return {

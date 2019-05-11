@@ -1,5 +1,5 @@
 import { Action } from '../Action'
-import {PopupType} from "../../data/PopupType";
+import {PopupType} from "../../utils/types/PopupType";
 
 export type GeneralState = {
     activePopupType: PopupType

@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react'
-import BarType from '../../data/BarType'
+import BarType from '../../utils/types/BarType'
 import './ResizeBar.scss'
 import {Settings} from "../../settings/Settings";
 

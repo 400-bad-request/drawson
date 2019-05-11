@@ -1,8 +1,8 @@
-import {IPoint} from "../utils/geomatry/IPoint";
-import {DrawUtil} from "../utils/geomatry/DrawUtil";
+import {IPoint} from "../utils/geometry/IPoint";
+import {DrawUtil} from "../utils/geometry/DrawUtil";
 import {Settings} from "../settings/Settings";
-import {ISize} from "../utils/geomatry/ISize";
-import {IRect} from "../utils/geomatry/IRect";
+import {ISize} from "../utils/geometry/ISize";
+import {IRect} from "../utils/geometry/IRect";
 
 export class DrawEngine {
     private readonly canvas: HTMLCanvasElement;

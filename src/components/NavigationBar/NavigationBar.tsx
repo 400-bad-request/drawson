@@ -3,7 +3,7 @@ import './NavigationBar.scss'
 import {UnderlineTextButton} from '../Buttons/UnderlineTextButton/UnderlineTextButton'
 import {AppState} from '../../store'
 import {connect} from 'react-redux'
-import {PopupType} from "../../data/PopupType";
+import {PopupType} from "../../utils/types/PopupType";
 import {updateActivePopupType} from "../../store/general/actionCreators";
 
 interface IProps {

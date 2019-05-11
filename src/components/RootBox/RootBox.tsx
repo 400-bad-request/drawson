@@ -4,7 +4,7 @@ import {ResizableBox} from "../ResizableBox/ResizableBox";
 import {CodeEditor} from "../CodeEditor/CodeEditor";
 import {CodeDisplay} from "../CodeDisplay/CodeDisplay";
 import {ResizeBar} from "../ResizeBar/ResizeBar";
-import BarType from "../../data/BarType";
+import BarType from "../../utils/types/BarType";
 import {CanvasDisplay} from "../CanvasDisplay/CanvasDisplay";
 import {Settings} from "../../settings/Settings";
 

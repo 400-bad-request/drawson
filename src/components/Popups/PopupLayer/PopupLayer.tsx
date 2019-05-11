@@ -3,7 +3,7 @@ import './PopupLayer.scss'
 import {connect} from "react-redux";
 import {AppState} from "../../../store";
 import {updateActivePopupType} from "../../../store/general/actionCreators";
-import {PopupType} from "../../../data/PopupType";
+import {PopupType} from "../../../utils/types/PopupType";
 import {GenericYesNoPopup} from "../GenericYesNoPopup/GenericYesNoPopup";
 import {FileUtil} from "../../../utils/FileUtil";
 
