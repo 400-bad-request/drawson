@@ -1,15 +1,15 @@
-import React from 'react'
-import './App.scss'
-import {PopupLayer} from "./components/Popups/PopupLayer/PopupLayer";
-import {EditorLayer} from "./components/EditorLayer/EditorLayer";
+import React from 'react';
+import './App.scss';
+import { PopupLayer } from './components/Popups/PopupLayer/PopupLayer';
+import { EditorLayer } from './components/EditorLayer/EditorLayer';
 
 const App = () => {
   return (
     <div className="App">
-        <EditorLayer/>
-        <PopupLayer/>
+      <EditorLayer />
+      <PopupLayer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -3,4 +3,4 @@ enum BarType {
   HORIZONTAL,
 }
 
-export default BarType
+export default BarType;

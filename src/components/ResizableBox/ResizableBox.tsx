@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react';
 
 interface Props {
-  width: number
-  height: number
-  style?: any
-  className?: string
+  width: number;
+  height: number;
+  style?: any;
+  className?: string;
 }
 
 export const ResizableBox: FunctionComponent<Props> = ({
@@ -19,5 +19,5 @@ export const ResizableBox: FunctionComponent<Props> = ({
     >
       {props.children}
     </div>
-  )
-}
+  );
+};

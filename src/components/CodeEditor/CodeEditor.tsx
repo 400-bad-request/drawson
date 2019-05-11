@@ -19,6 +19,7 @@ let timeout;
 export const CodeEditorComponent = (props: IProps) => {
   const onChange = (newValue: string) => {
     props.updateCodeEditorContent(newValue);
+    deferredCompilation();
   };
 
   const deferredCompilation = () => {

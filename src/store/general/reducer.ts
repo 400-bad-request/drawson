@@ -1,9 +1,9 @@
-import { GeneralActionTypes, GeneralState } from './types'
-import { Action } from '../Action'
+import { GeneralActionTypes, GeneralState } from './types';
+import { Action } from '../Action';
 
 const initialState: GeneralState = {
-  activePopupType: null
-}
+  activePopupType: null,
+};
 
 export function generalReducer(
   state = initialState,
@@ -14,9 +14,9 @@ export function generalReducer(
       return {
         ...state,
         activePopupType: action.payload.activePopupType,
-      }
+      };
     }
     default:
-      return state
+      return state;
   }
 }

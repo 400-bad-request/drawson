@@ -1,16 +1,15 @@
-import { Action } from '../Action'
-import {PopupType} from "../../utils/types/PopupType";
+import { Action } from '../Action';
+import { PopupType } from '../../utils/types/PopupType';
 
 export type GeneralState = {
-    activePopupType: PopupType
-}
+  activePopupType: PopupType;
+};
 
 interface UpdateActivePopupTypeAction {
-    type: typeof Action.UPDATE_ACTIVE_POPUP_TYPE
+  type: typeof Action.UPDATE_ACTIVE_POPUP_TYPE;
   payload: {
-      activePopupType: PopupType
-  }
+    activePopupType: PopupType;
+  };
 }
 
-export type GeneralActionTypes =
-    | UpdateActivePopupTypeAction
+export type GeneralActionTypes = UpdateActivePopupTypeAction;

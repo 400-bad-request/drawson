@@ -1,14 +1,14 @@
-import React, {FunctionComponent} from 'react'
-import BarType from '../../utils/types/BarType'
-import './ResizeBar.scss'
-import {Settings} from "../../settings/Settings";
+import React, { FunctionComponent } from 'react';
+import BarType from '../../utils/types/BarType';
+import './ResizeBar.scss';
+import { Settings } from '../../settings/Settings';
 
 interface Props {
-  orientation: BarType
-  length: number
-  onMouseDown?: any
-  onMouseMove?: any
-  onMouseUp?: any
+  orientation: BarType;
+  length: number;
+  onMouseDown?: any;
+  onMouseMove?: any;
+  onMouseUp?: any;
 }
 
 export const ResizeBar: FunctionComponent<Props> = ({
@@ -26,7 +26,7 @@ export const ResizeBar: FunctionComponent<Props> = ({
       onMouseMove={onMouseMove}
       style={getStyle(orientation, length)}
     />
-  )
+  );
 };
 
 const getStyle = (orientation: BarType, length: number) => {
@@ -35,12 +35,12 @@ const getStyle = (orientation: BarType, length: number) => {
       width: length + 'px',
       height: Settings.RESIZE_BAR_WIDTH,
       cursor: 'row-resize',
-    }
+    };
   } else {
     return {
       height: length + 'px',
       width: Settings.RESIZE_BAR_WIDTH,
       cursor: 'col-resize',
-    }
+    };
   }
-}
+};

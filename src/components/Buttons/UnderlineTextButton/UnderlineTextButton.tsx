@@ -1,15 +1,15 @@
-import React from 'react'
-import classNames from 'classnames'
-import './UnderlineTextButton.scss'
+import React from 'react';
+import classNames from 'classnames';
+import './UnderlineTextButton.scss';
 
 interface IProps {
-  under?: boolean
-  over?: boolean
-  active?: boolean
-  key?: string
-  label: string
-  onClick?: () => any
-  style?: React.CSSProperties
+  under?: boolean;
+  over?: boolean;
+  active?: boolean;
+  key?: string;
+  label: string;
+  onClick?: () => any;
+  style?: React.CSSProperties;
 }
 
 export const UnderlineTextButton = (props: IProps) => {
@@ -18,8 +18,8 @@ export const UnderlineTextButton = (props: IProps) => {
       under: props.under,
       over: props.over,
       active: props.active,
-    })
-  }
+    });
+  };
   return (
     <div
       className={getClassName()}
@@ -29,5 +29,5 @@ export const UnderlineTextButton = (props: IProps) => {
     >
       {props.label}
     </div>
-  )
-}
+  );
+};

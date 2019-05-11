@@ -1,14 +1,14 @@
-import React from 'react'
-import './NavigationBar.scss'
-import {UnderlineTextButton} from '../Buttons/UnderlineTextButton/UnderlineTextButton'
-import {AppState} from '../../store'
-import {connect} from 'react-redux'
-import {PopupType} from "../../utils/types/PopupType";
-import {updateActivePopupType} from "../../store/general/actionCreators";
+import React from 'react';
+import './NavigationBar.scss';
+import { UnderlineTextButton } from '../Buttons/UnderlineTextButton/UnderlineTextButton';
+import { AppState } from '../../store';
+import { connect } from 'react-redux';
+import { PopupType } from '../../utils/types/PopupType';
+import { updateActivePopupType } from '../../store/general/actionCreators';
 
 interface IProps {
-    updateActivePopupType: (activePopupType: PopupType) => any
-    activePopupType: PopupType
+  updateActivePopupType: (activePopupType: PopupType) => any;
+  activePopupType: PopupType;
 }
 
 const NavigationBarComponent = (props: IProps) => {
@@ -23,54 +23,46 @@ const NavigationBarComponent = (props: IProps) => {
           />
         </div>
         <UnderlineTextButton
-            label={'IMPORT'}
-            under={true}
-            active={props.activePopupType === PopupType.IMPORT}
-            onClick={() =>
-                props.updateActivePopupType(PopupType.IMPORT)
-          }
+          label={'IMPORT'}
+          under={true}
+          active={props.activePopupType === PopupType.IMPORT}
+          onClick={() => props.updateActivePopupType(PopupType.IMPORT)}
         />
         <UnderlineTextButton
-            label={'EXPORT'}
-            under={true}
-            active={props.activePopupType === PopupType.EXPORT}
-            onClick={() =>
-                props.updateActivePopupType(PopupType.EXPORT)
-          }
+          label={'EXPORT'}
+          under={true}
+          active={props.activePopupType === PopupType.EXPORT}
+          onClick={() => props.updateActivePopupType(PopupType.EXPORT)}
         />
         <UnderlineTextButton
-            label={'OPTIONS'}
-            under={true}
-            active={props.activePopupType === PopupType.OPTIONS}
-            onClick={() =>
-                props.updateActivePopupType(PopupType.OPTIONS)
-          }
+          label={'OPTIONS'}
+          under={true}
+          active={props.activePopupType === PopupType.OPTIONS}
+          onClick={() => props.updateActivePopupType(PopupType.OPTIONS)}
         />
         <UnderlineTextButton label={'COMPILE'} under={true} />
       </div>
       <div className="NavigationBarGroup">
         <UnderlineTextButton
-            label={'ABOUT'}
-            under={true}
-            active={props.activePopupType === PopupType.ABOUT}
-            onClick={() =>
-                props.updateActivePopupType(PopupType.ABOUT)
-            }
+          label={'ABOUT'}
+          under={true}
+          active={props.activePopupType === PopupType.ABOUT}
+          onClick={() => props.updateActivePopupType(PopupType.ABOUT)}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state: AppState) => ({
-    activePopupType: state.general.activePopupType
-})
+  activePopupType: state.general.activePopupType,
+});
 
 const dispatchToProps = {
-    updateActivePopupType: updateActivePopupType
-}
+  updateActivePopupType: updateActivePopupType,
+};
 
 export const NavigationBar = connect(
   mapStateToProps,
   dispatchToProps
-)(NavigationBarComponent)
+)(NavigationBarComponent);
