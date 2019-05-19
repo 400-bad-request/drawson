@@ -4,46 +4,46 @@ Tokens used in a programming language used to draw on canvas
 
 ## Tokens table
 
-| #   | Value                                         | Type                         | Description                                                     |
-| --- | --------------------------------------------- | ---------------------------- | --------------------------------------------------------------- |
-| 1   | +                                             | Operator (binary arithmetic) | Addition                                                        |
-| 2   | -                                             | Operator (binary arithmetic) | Subtraction                                                     |
-| 3   | \*                                            | Operator (binary arithmetic) | Multiplication                                                  |
-| 4   | /                                             | Operator (binary arithmetic) | Division                                                        |
-| 5   | \>                                            | Operator (binary relational) | Greater than                                                    |
-| 6   | \<                                            | Operator (binary relational) | Less than                                                       |
-| 7   | \>=                                           | Operator (binary relational) | Greater than or equal to                                        |
-| 8   | \<=                                           | Operator (binary relational) | Less than or equal to                                           |
-| 9   | ==                                            | Operator (binary relational) | Equal to                                                        |
-| 10  | !=                                            | Operator (binary relational) | Not equal to                                                    |
-| 11  | &&                                            | Operator (binary logical)    | Logical AND                                                     |
-| 12  | &#124;&#124;                                  | Operator (binary logical)    | Logical AND                                                     |
-| 13  | !                                             | Operator (unary logical)     | Logical NOT                                                     |
-| 14  | =                                             | Operator (binary assignment) | Simple assignment                                               |
-| 14  | (                                             | Special symbol               | Left parenthesis                                                |
-| 15  | )                                             | Special symbol               | Right parenthesis                                               |
-| 16  | {                                             | Special symbol               | Left curly bracket                                              |
-| 17  | }                                             | Special symbol               | Right curly bracket                                             |
-| 18  | #                                             | Special symbol               | Begins and finishes the comment                                 |
-| 19  | ;                                             | Special symbol               | Ends statement                                                  |
-| 20  | [space]                                       | Special symbol               | Separates the tokens                                            |
-| 21  | let                                           | Keyword                      | Begins the definition of a variable                             |
-| 22  | set                                           | Keyword (operation)          | Allows to define the properties of drawn objects                |
-| 23  | clear                                         | Keyword (operation)          | Clears defined properties                                       |
-| 24  | draw                                          | Keyword (operation)          | Begins the definition of the object you want to draw            |
-| 25  | fill                                          | Keyword (operation)          | Begins the definition of the object you want to fill with color |
-| 26  | color                                         | Keyword (property)           | Defines colour of the drawn line                                |
-| 27  | paint                                         | Keyword (property)           | Defines background colour of drawn shape                        |
-| 28  | thickness                                     | Keyword (property)           | Defines thickness of the drawn line                             |
-| 29  | circle                                        | Keyword (shape)              | Circle                                                          |
-| 30  | rect                                          | Keyword (shape)              | Rect                                                            |
-| 31  | line                                          | Keyword (shape)              | Line                                                            |
-| 32  | for                                           | Keyword                      | Begins the definition of the for loop                           |
-| 33  | while                                         | Keyword                      | Begins the definition of the while loop                         |
-| 34  | in                                            | Keyword                      | Allows the definition of range of the for loop                  |
-| 35  | [a-z &#124; A-Z][a-z &#124; a-z &#124; 0-9]\* | Identifier                   | Allows the definition of variables                              |
-| 36  | [1-9][0-9]\*                                  | Integer                      | It can be assigned to a variable                                |
-| 37  | #[0-9 &#124; a-f]{6}                          | Color value                  | It can be set as color property value                           |
+| #   | Value                 | Type                         | Description                                                     |
+| --- | --------------------- | ---------------------------- | --------------------------------------------------------------- |
+| 1   | +                     | Operator (binary arithmetic) | Addition                                                        |
+| 2   | -                     | Operator (binary arithmetic) | Subtraction                                                     |
+| 3   | \*                    | Operator (binary arithmetic) | Multiplication                                                  |
+| 4   | /                     | Operator (binary arithmetic) | Division                                                        |
+| 5   | \>                    | Operator (binary relational) | Greater than                                                    |
+| 6   | \<                    | Operator (binary relational) | Less than                                                       |
+| 7   | \>=                   | Operator (binary relational) | Greater than or equal to                                        |
+| 8   | \<=                   | Operator (binary relational) | Less than or equal to                                           |
+| 9   | ==                    | Operator (binary relational) | Equal to                                                        |
+| 10  | !=                    | Operator (binary relational) | Not equal to                                                    |
+| 11  | &&                    | Operator (binary logical)    | Logical AND                                                     |
+| 12  | `||`                  | Operator (binary logical)    | Logical OR                                                      |
+| 13  | !                     | Operator (unary logical)     | Logical NOT                                                     |
+| 14  | =                     | Operator (binary assignment) | Simple assignment                                               |
+| 14  | (                     | Special symbol               | Left parenthesis                                                |
+| 15  | )                     | Special symbol               | Right parenthesis                                               |
+| 16  | {                     | Special symbol               | Left curly bracket                                              |
+| 17  | }                     | Special symbol               | Right curly bracket                                             |
+| 18  | #                     | Special symbol               | Begins and finishes the comment                                 |
+| 19  | ;                     | Special symbol               | Ends statement                                                  |
+| 20  | [space]               | Special symbol               | Separates the tokens                                            |
+| 21  | let                   | Keyword                      | Begins the definition of a variable                             |
+| 22  | set                   | Keyword (operation)          | Allows to define the properties of drawn objects                |
+| 23  | clear                 | Keyword (operation)          | Clears defined properties                                       |
+| 24  | draw                  | Keyword (operation)          | Begins the definition of the object you want to draw            |
+| 25  | fill                  | Keyword (operation)          | Begins the definition of the object you want to fill with color |
+| 26  | color                 | Keyword (property)           | Defines colour of the drawn line                                |
+| 27  | paint                 | Keyword (property)           | Defines background colour of drawn shape                        |
+| 28  | thickness             | Keyword (property)           | Defines thickness of the drawn line                             |
+| 29  | circle                | Keyword (shape)              | Circle                                                          |
+| 30  | rect                  | Keyword (shape)              | Rect                                                            |
+| 31  | line                  | Keyword (shape)              | Line                                                            |
+| 32  | for                   | Keyword                      | Begins the definition of the for loop                           |
+| 33  | while                 | Keyword                      | Begins the definition of the while loop                         |
+| 34  | in                    | Keyword                      | Allows the definition of range of the for loop                  |
+| 35  | [a-zA-Z][a-za-z0-9]\* | Identifier                   | Allows the definition of variables                              |
+| 36  | [1-9][0-9] `|` 0      | Integer                      | It can be assigned to a variable                                |
+| 37  | #[0-9 &#124; a-f]{6}  | Color value                  | It can be set as color property value                           |
 
 **Arithmetic operators** - take numerical values (either literals or variables) as their operands and return a single numerical value.
 
