@@ -11,8 +11,7 @@ fetch(grammarUrl)
   .then(r => r.text())
   .then(grammar => {
     Compilator.grammar = ohm.grammar(grammar);
-    Compilator.semantics = Compilator.grammar.createSemantics().addOperation('eval', {
-      
+    Compilator.semantics = Compilator.grammar.createSemantics().addOperation('eval', {});
   });
 
 const App = () => {
