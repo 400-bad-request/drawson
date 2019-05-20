@@ -21,6 +21,7 @@ const compile = (code: string) => {
   const match = Compilator.grammar.match(code);
   if (match.succeeded()) {
     console.log('code compiled properly');
+    console.log(Compilator.semantics(match).eval());
   } else {
     console.log('compilation failed');
   }
