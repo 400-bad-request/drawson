@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react';
 import AceEditor from 'react-ace';
 import './CodeEditor.scss';
 
 import 'brace/theme/monokai';
-import { AppState } from '../../store';
-import { connect } from 'react-redux';
-import { updateCodeEditorContent } from '../../store/editor/actionCreators';
-import { Compilator } from '../../utils/Compilator';
+import {AppState} from '../../store';
+import {connect} from 'react-redux';
+import {updateCodeEditorContent} from '../../store/editor/actionCreators';
+import {Compiler} from '../../compiler/Compiler';
 
 interface Props {
   width: number;
@@ -17,13 +17,13 @@ interface Props {
 
 let timeout: any;
 
-const compile = (code: string) => {
-  const match = Compilator.grammar.match(code);
-  if (match.succeeded()) {
-    console.log('code compiled properly');
-    console.log(Compilator.semantics(match).eval());
+const deferredCompilation = (code: string) => {
+  const cmp = () => Compiler.compile(code);
+  if (timeout) {
+    clearTimeout(timeout);
+    timeout = setTimeout(cmp, 1500);
   } else {
-    console.log('compilation failed');
+    timeout = setTimeout(cmp, 1500);
   }
 };
 
@@ -36,16 +36,6 @@ export const CodeEditorComponent: FunctionComponent<Props> = ({
   const onChange = (newValue: string) => {
     updateCodeEditorContent(newValue);
     deferredCompilation(newValue);
-  };
-
-  const deferredCompilation = (code: string) => {
-    const cmp = () => compile(code);
-    if (timeout) {
-      clearTimeout(timeout);
-      timeout = setTimeout(cmp, 1500);
-    } else {
-      timeout = setTimeout(cmp, 1500);
-    }
   };
 
   return (
