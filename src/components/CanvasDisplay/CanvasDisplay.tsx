@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 interface IProps {
   width: number;
   height: number;
-  compilationOutput: any[];
+  compilationOutput: string;
 }
 
 export class CanvasDisplayComponent extends React.Component<IProps, {}> {

@@ -7,19 +7,15 @@ export class Circle {
   readonly y: number;
   readonly r: number;
 
-  constructor(
-    x: number,
-    y: number,
-    r: number,
-  ) {
+  constructor(x: number, y: number, r: number) {
     this.type = 'circle';
     this.x = x;
     this.y = y;
     this.r = r;
   }
 
-  public toJSON(): string {
-    let obj = {
+  public toJSON(): any {
+    return {
       type: this.type,
       line_color: this.lineColor,
       line_thickness: this.lineThickness,
@@ -28,6 +24,5 @@ export class Circle {
       y: this.y,
       r: this.r,
     };
-    return JSON.stringify(obj);
   }
 }

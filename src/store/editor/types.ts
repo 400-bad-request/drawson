@@ -2,13 +2,13 @@ import { Action } from '../Action';
 
 export type EditorState = {
   codeEditorContent: string;
-  compilationOutput: any[];
+  compilationOutput: string;
 };
 
 interface UpdateCompilationOutputAction {
   type: typeof Action.UPDATE_COMPILATION_OUTPUT;
   payload: {
-    compilationOutput: any[];
+    compilationOutput: string;
   };
 }
 

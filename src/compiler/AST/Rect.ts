@@ -8,12 +8,7 @@ export class Rect {
   readonly width: number;
   readonly height: number;
 
-  constructor(
-    x: number,
-    y: number,
-    width: number,
-    height: number
-  ) {
+  constructor(x: number, y: number, width: number, height: number) {
     this.type = 'rectangle';
     this.x = x;
     this.y = y;
@@ -21,8 +16,8 @@ export class Rect {
     this.height = height;
   }
 
-  public toJSON(): string {
-    let obj = {
+  public toJSON() {
+    return {
       type: this.type,
       line_color: this.lineColor,
       line_thickness: this.lineThickness,
@@ -32,6 +27,5 @@ export class Rect {
       width: this.width,
       height: this.height,
     };
-    return JSON.stringify(obj);
   }
 }

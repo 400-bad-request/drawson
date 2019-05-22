@@ -36,16 +36,10 @@ export class Compiler {
     FillableObjectDefinition_rect_definition: (_, a1, a2, a3, a4) =>
       new Rect(a1.eval(), a2.eval(), a3.eval(), a4.eval()),
     ArithmeticStatement: e => e.eval(),
-    integer_number: (first, rest) => {
-      console.log(rest.children);
-      parseInt(first.eval() + 0);
-      return 0;
-    },
-    nonZeroDigit: e => {
-      console.log(e.children);
-      return '0';
-    },
+    integer_number: (first, rest) => parseInt(first.eval() + rest.eval()),
+    nonZeroDigit: e => e.eval(),
     integer_zero: e => 0,
+    digit: e => e.primitiveValue,
     identifier: (first, rest) =>
       Compiler.globalVariableMap.get(
         first.primitiveValue + rest.primitiveValue
@@ -55,15 +49,16 @@ export class Compiler {
     ArithmeticStatement_arithmetic_operation: (as1, op, as2) => 0,
   };
 
-  public static compile(code: string) {
+  public static async compile(code: string): Promise<string> {
     let match = Compiler.grammar.match(code);
     if (match.succeeded()) {
       console.log('compilation success 🎉');
       Compiler.semantics(match).eval();
-      console.log(JSON.stringify(Compiler.AST));
+      return JSON.stringify(Compiler.AST, null, 2);
     } else {
       console.error('compilation failure, parsing gone wrong');
       console.error(match.message);
+      return '[]';
     }
   }
 

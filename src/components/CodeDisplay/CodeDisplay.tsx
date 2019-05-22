@@ -2,17 +2,20 @@ import React, { FunctionComponent } from 'react';
 import AceEditor from 'react-ace';
 
 import 'brace/theme/monokai';
-import { MockState } from '../../data/MockState';
 import { AppState } from '../../store';
 import { connect } from 'react-redux';
 
 interface Props {
   width: number;
   height: number;
-  compilationOutput: any[];
+  compilationOutput: string;
 }
 
-const CodeDisplayComponent: FunctionComponent<Props> = ({ width, height }) => {
+const CodeDisplayComponent: FunctionComponent<Props> = ({
+  width,
+  height,
+  compilationOutput,
+}) => {
   return (
     <AceEditor
       theme={'github'}
@@ -21,7 +24,7 @@ const CodeDisplayComponent: FunctionComponent<Props> = ({ width, height }) => {
       fontSize={16}
       readOnly={true}
       mode={'json'}
-      value={JSON.stringify(MockState, null, 3)}
+      value={compilationOutput}
     />
   );
 };

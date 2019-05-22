@@ -7,12 +7,7 @@ export class Line {
   readonly x2: number;
   readonly y2: number;
 
-  constructor(
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number
-  ) {
+  constructor(x1: number, y1: number, x2: number, y2: number) {
     this.type = 'line';
     this.x1 = x1;
     this.y1 = y1;
@@ -20,8 +15,8 @@ export class Line {
     this.y2 = y2;
   }
 
-  public toJSON(): string {
-    let obj = {
+  public toJSON(): any {
+    return {
       type: this.type,
       line_color: this.lineColor,
       line_thickness: this.lineThickness,
@@ -30,6 +25,5 @@ export class Line {
       x2: this.x2,
       y2: this.y2,
     };
-    return JSON.stringify(obj);
   }
 }

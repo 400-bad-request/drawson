@@ -2,7 +2,7 @@ import { EditorActionTypes } from './types';
 import { Action } from '../Action';
 
 export function updateCompilationOutput(
-  compilationOutput: any[]
+  compilationOutput: string
 ): EditorActionTypes {
   return {
     type: Action.UPDATE_COMPILATION_OUTPUT,

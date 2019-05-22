@@ -1,9 +1,8 @@
-import { EditorActionTypes, EditorState } from './types';
-import { MockState } from '../../data/MockState';
 import { Action } from '../Action';
+import { EditorActionTypes, EditorState } from './types';
 
 const initialState: EditorState = {
-  compilationOutput: MockState,
+  compilationOutput: '[]',
   codeEditorContent: '',
 };
 

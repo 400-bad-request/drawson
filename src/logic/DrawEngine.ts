@@ -17,9 +17,9 @@ export class DrawEngine {
   private translationAnchor: IPoint = null;
   private lastAnchor: IPoint = null;
 
-  constructor(canvas: HTMLCanvasElement, content: any[]) {
+  constructor(canvas: HTMLCanvasElement, content: string) {
     this.canvas = canvas;
-    this.content = content;
+    this.content = JSON.parse(content);
 
     this.width = this.canvas.width;
     this.height = this.canvas.height;
@@ -102,8 +102,8 @@ export class DrawEngine {
     this.draw();
   }
 
-  public updateContent(content: any[]) {
-    this.content = content;
+  public updateContent(content: string) {
+    this.content = JSON.parse(content);
     this.draw();
   }
 

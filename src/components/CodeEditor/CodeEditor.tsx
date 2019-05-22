@@ -1,38 +1,48 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import AceEditor from 'react-ace';
 import './CodeEditor.scss';
 
 import 'brace/theme/monokai';
-import {AppState} from '../../store';
-import {connect} from 'react-redux';
-import {updateCodeEditorContent} from '../../store/editor/actionCreators';
-import {Compiler} from '../../compiler/Compiler';
+import { AppState } from '../../store';
+import { connect } from 'react-redux';
+import {
+  updateCodeEditorContent,
+  updateCompilationOutput,
+} from '../../store/editor/actionCreators';
+import { Compiler } from '../../compiler/Compiler';
 
 interface Props {
   width: number;
   height: number;
   codeEditorContent: string;
-  updateCodeEditorContent: (codeEditorContent: string) => any;
+  updateCodeEditorContent: (codeEditorContent: string) => void;
+  updateCompilationOutput: (output: string) => void;
 }
 
 let timeout: any;
-
-const deferredCompilation = (code: string) => {
-  const cmp = () => Compiler.compile(code);
-  if (timeout) {
-    clearTimeout(timeout);
-    timeout = setTimeout(cmp, 1500);
-  } else {
-    timeout = setTimeout(cmp, 1500);
-  }
-};
 
 export const CodeEditorComponent: FunctionComponent<Props> = ({
   width,
   height,
   codeEditorContent,
   updateCodeEditorContent,
+  updateCompilationOutput,
 }) => {
+  const compile = async code => {
+    let output = await Compiler.compile(code);
+    updateCompilationOutput(output);
+  };
+
+  const deferredCompilation = (code: string) => {
+    let cmp = () => compile(code);
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = setTimeout(cmp, 1500);
+    } else {
+      timeout = setTimeout(cmp, 1500);
+    }
+  };
+
   const onChange = (newValue: string) => {
     updateCodeEditorContent(newValue);
     deferredCompilation(newValue);
@@ -55,7 +65,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const dispatchToProps = {
-  updateCodeEditorContent: updateCodeEditorContent,
+  updateCodeEditorContent,
+  updateCompilationOutput,
 };
 
 export const CodeEditor = connect(
