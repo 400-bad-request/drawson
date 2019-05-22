@@ -1,0 +1,48 @@
+[
+  {
+    "type": "circle",
+    "line_color": "#000000",
+    "line_thickness": 1,
+    "background_color": "#39abf5",
+    "x": 90,
+    "y": 90,
+    "r": 100
+  },
+  {
+    "type": "circle",
+    "line_color": "#000000",
+    "line_thickness": 1,
+    "background_color": "#ffffff",
+    "x": 150,
+    "y": 150,
+    "r": 20
+  },
+  {
+    "type": "circle",
+    "line_color": "#000000",
+    "line_thickness": 1,
+    "background_color": "#ffffff",
+    "x": 30,
+    "y": 30,
+    "r": 20
+  },
+  {
+    "type": "rectangle",
+    "line_color": "#000000",
+    "line_thickness": 1,
+    "background_color": "#ffffff",
+    "x": 30,
+    "y": 30,
+    "width": 120,
+    "height": 120
+  },
+  {
+    "type": "line",
+    "line_color": "#000000",
+    "line_thickness": 1,
+    "x1": 30,
+    "y1": 30,
+    "x2": 150,
+    "y2": 150
+  }
+]

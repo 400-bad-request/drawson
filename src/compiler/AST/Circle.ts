@@ -1,8 +1,8 @@
 export class Circle {
   readonly type: string;
-  readonly lineColor: string;
-  readonly lineThickness: number;
-  readonly backgroundColor: string;
+  public lineColor: string;
+  public lineThickness: number;
+  public backgroundColor: string;
   readonly x: number;
   readonly y: number;
   readonly r: number;
@@ -11,14 +11,8 @@ export class Circle {
     x: number,
     y: number,
     r: number,
-    lineColor: string,
-    lineThickness: number,
-    backgroundColor: string
   ) {
     this.type = 'circle';
-    this.lineColor = lineColor;
-    this.lineThickness = lineThickness;
-    this.backgroundColor = backgroundColor;
     this.x = x;
     this.y = y;
     this.r = r;

@@ -36,16 +36,20 @@ Drawson {
 
   ClearStatement = "clear" terminator
 
-  SetStatement = "set" SetDefinition terminator
+  SetStatement = "set" SetDefinition terminator 
 
   SetDefinition 
     = "color" colorValue
     | "paint" colorValue
     | "thickness" ArithmeticStatement
       
-  DrawStatement = "draw" ObjectDefinition terminator
+  DrawStatement = drawKeyword ObjectDefinition terminator
 
-  FillStatement = "fill" FillableObjectDefinition terminator
+  drawKeyword = "draw"
+
+  FillStatement = fillKeyword FillableObjectDefinition terminator
+
+  fillKeyword = "fill"
 
   ObjectDefinition
     = FillableObjectDefinition
@@ -96,7 +100,7 @@ Drawson {
     | ">="
     | "<="
 
-  identifier = lower alnum*
+  identifier = ~drawKeyword ~fillKeyword ~circleObjectKeyword ~rectObjectKeyword ~lineObjectKeyword lower alnum*
 
   colorValue = "#" alnum alnum alnum alnum alnum alnum
   
