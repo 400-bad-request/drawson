@@ -12,7 +12,24 @@ export class Compiler {
   private static globalVariableMap = new Map();
   private static lineColor = '#000000';
   private static lineThickness = 1;
-  private static backgroundColor = '#666666';
+  private static backgroundColor = '#AA12DF';
+
+  private static clearContext() {
+    Compiler.lineColor = '#000000';
+    Compiler.lineThickness = 1;
+    Compiler.backgroundColor = '#666666';
+  }
+
+  private static addToAST(obj, isFilled) {
+    if (isFilled) {
+      obj.backgroundColor = Compiler.backgroundColor;
+    } else {
+      obj.backgroundColor = 'TRANSPARENT';
+    }
+    obj.lineThickness = Compiler.lineThickness;
+    obj.lineColor = Compiler.lineColor;
+    Compiler.AST.push(obj);
+  }
 
   private static eval = {
     Start: e => {
@@ -20,22 +37,15 @@ export class Compiler {
       return e.eval();
     },
     Statement: e => e.eval(),
+    // Statements
     Comment: (start, notEnd, commentEnd) => '',
-    DrawStatement: (_, objectDefinition, teminator) => {
-      let obj = objectDefinition.eval();
-      obj.backgroundColor = 'TRANSPARENT';
-      obj.lineThickness = Compiler.lineThickness;
-      obj.lineColor = Compiler.lineColor;
-      Compiler.AST.push(obj);
-    },
-    FillStatement: (_, fObjectDefinition, terminator) => {
-      let obj = fObjectDefinition.eval();
-      obj.backgroundColor = 'TRANSPARENT';
-      obj.lineThickness = Compiler.lineThickness;
-      obj.backgroundColor = Compiler.backgroundColor;
-      obj.lineColor = Compiler.lineColor;
-      Compiler.AST.push(obj);
-    },
+    DrawStatement: (_, objectDefinition, teminator) =>
+      Compiler.addToAST(objectDefinition.eval(), false),
+    FillStatement: (_, objectDefinition, eoc) =>
+      Compiler.addToAST(objectDefinition.eval(), true),
+    ClearStatement: (_, eoc) => Compiler.clearContext(),
+    SetStatement: (_, setDefinition, eoc) => setDefinition.eval(),
+    // Object Definition
     ObjectDefinition: e => e.eval(),
     ObjectDefinition_line_definition: (_, a1, a2, a3, a4) =>
       new Line(a1.eval(), a2.eval(), a3.eval(), a4.eval()),
@@ -43,16 +53,27 @@ export class Compiler {
       new Circle(a1.eval(), a2.eval(), a3.eval()),
     FillableObjectDefinition_rect_definition: (_, a1, a2, a3, a4) =>
       new Rect(a1.eval(), a2.eval(), a3.eval(), a4.eval()),
-    ArithmeticStatement: e => e.eval(),
-    integer_number: (first, rest) => {
-      console.log(rest);
-      return parseInt(
-        first.eval() + rest.children.reduce((acc, val) => acc + val.eval(), '')
-      );
+    // Set Definition
+    SetDefinition: (prop, value) => {
+      switch (prop.primitiveValue) {
+        case 'color':
+          Compiler.backgroundColor = value.eval();
+          break;
+        case 'paint':
+          Compiler.lineColor = value.eval();
+          break;
+        case 'thickness':
+          Compiler.lineThickness = value.eval();
+          break;
+      }
     },
+    ArithmeticStatement: e => e.eval(),
+    integer_number: (first, rest) =>
+      parseInt(
+        first.eval() + rest.children.reduce((acc, val) => acc + val.eval(), '')
+      ),
     nonZeroDigit: e => e.eval(),
     integer_zero: e => '0',
-    digit: e => e.primitiveValue,
     identifier: (first, rest) =>
       Compiler.globalVariableMap.get(
         first.primitiveValue + rest.primitiveValue
@@ -60,6 +81,21 @@ export class Compiler {
     ArithmeticStatement_arithmetic_parentheses: (_, as, __) => 0,
     ArithmeticStatement_minus_arithmetic_parentheses: (_, _minus, as, __) => 0,
     ArithmeticStatement_arithmetic_operation: (as1, op, as2) => 0,
+    // alnum
+    alnum: e => e.eval(),
+    letter: e => e.eval(),
+    upper: e => e.primitiveValue,
+    lower: e => e.primitiveValue,
+    digit: e => e.primitiveValue,
+    // color value
+    colorValue: (_, d1, d2, d3, d4, d5, d6) =>
+      '#' +
+      d1.eval() +
+      d2.eval() +
+      d3.eval() +
+      d4.eval() +
+      d5.eval() +
+      d6.eval(),
   };
 
   public static async compile(code: string): Promise<string> {
