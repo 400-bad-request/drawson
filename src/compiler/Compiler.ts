@@ -36,9 +36,14 @@ export class Compiler {
     FillableObjectDefinition_rect_definition: (_, a1, a2, a3, a4) =>
       new Rect(a1.eval(), a2.eval(), a3.eval(), a4.eval()),
     ArithmeticStatement: e => e.eval(),
-    integer_number: (first, rest) => parseInt(first.eval() + rest.eval()),
+    integer_number: (first, rest) => {
+      console.log(rest);
+      return parseInt(
+        first.eval() + rest.children.reduce((acc, val) => acc + val.eval(), '')
+      );
+    },
     nonZeroDigit: e => e.eval(),
-    integer_zero: e => 0,
+    integer_zero: e => '0',
     digit: e => e.primitiveValue,
     identifier: (first, rest) =>
       Compiler.globalVariableMap.get(
