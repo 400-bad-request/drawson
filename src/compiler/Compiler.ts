@@ -12,7 +12,7 @@ export class Compiler {
   private static globalVariableMap = new Map();
   private static lineColor = '#000000';
   private static lineThickness = 1;
-  private static backgroundColor = '#FFFFFF';
+  private static backgroundColor = '#666666';
 
   private static eval = {
     Start: e => {
@@ -25,6 +25,14 @@ export class Compiler {
       let obj = objectDefinition.eval();
       obj.backgroundColor = 'TRANSPARENT';
       obj.lineThickness = Compiler.lineThickness;
+      obj.lineColor = Compiler.lineColor;
+      Compiler.AST.push(obj);
+    },
+    FillStatement: (_, fObjectDefinition, terminator) => {
+      let obj = fObjectDefinition.eval();
+      obj.backgroundColor = 'TRANSPARENT';
+      obj.lineThickness = Compiler.lineThickness;
+      obj.backgroundColor = Compiler.backgroundColor;
       obj.lineColor = Compiler.lineColor;
       Compiler.AST.push(obj);
     },
