@@ -32,19 +32,22 @@ export class Compiler {
   }
 
   private static eval = {
+    // Base
     Start: e => {
       Compiler.AST = [];
       return e.eval();
     },
     Statement: e => e.eval(),
+  
     // Statements
-    Comment: (start, notEnd, commentEnd) => '',
-    DrawStatement: (_, objectDefinition, teminator) =>
+    Comment: (a, b, c) => '',
+    DrawStatement: (_, objectDefinition, __) =>
       Compiler.addToAST(objectDefinition.eval(), false),
-    FillStatement: (_, objectDefinition, eoc) =>
+    FillStatement: (_, objectDefinition, __) =>
       Compiler.addToAST(objectDefinition.eval(), true),
-    ClearStatement: (_, eoc) => Compiler.clearContext(),
-    SetStatement: (_, setDefinition, eoc) => setDefinition.eval(),
+    ClearStatement: (_, __) => Compiler.clearContext(),
+    SetStatement: (_, setDefinition, __) => setDefinition.eval(),
+  
     // Object Definition
     ObjectDefinition: e => e.eval(),
     ObjectDefinition_line_definition: (_, a1, a2, a3, a4) =>
@@ -53,9 +56,10 @@ export class Compiler {
       new Circle(a1.eval(), a2.eval(), a3.eval()),
     FillableObjectDefinition_rect_definition: (_, a1, a2, a3, a4) =>
       new Rect(a1.eval(), a2.eval(), a3.eval(), a4.eval()),
+    
     // Set Definition
-    SetDefinition: (prop, value) => {
-      switch (prop.primitiveValue) {
+    SetDefinition: (property, value) => {
+      switch (property.primitiveValue) {
         case 'color':
           Compiler.backgroundColor = value.eval();
           break;
@@ -67,6 +71,8 @@ export class Compiler {
           break;
       }
     },
+
+    // Arithmetic
     ArithmeticStatement: e => e.eval(),
     integer_number: (first, rest) =>
       parseInt(
@@ -81,12 +87,14 @@ export class Compiler {
     ArithmeticStatement_arithmetic_parentheses: (_, as, __) => 0,
     ArithmeticStatement_minus_arithmetic_parentheses: (_, _minus, as, __) => 0,
     ArithmeticStatement_arithmetic_operation: (as1, op, as2) => 0,
+    
     // alnum
     alnum: e => e.eval(),
     letter: e => e.eval(),
     upper: e => e.primitiveValue,
     lower: e => e.primitiveValue,
     digit: e => e.primitiveValue,
+    
     // color value
     colorValue: (_, d1, d2, d3, d4, d5, d6) =>
       '#' +
