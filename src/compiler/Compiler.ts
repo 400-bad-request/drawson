@@ -38,7 +38,7 @@ export class Compiler {
       return e.eval();
     },
     Statement: e => e.eval(),
-  
+
     // Statements
     Comment: (a, b, c) => '',
     DrawStatement: (_, objectDefinition, __) =>
@@ -47,7 +47,7 @@ export class Compiler {
       Compiler.addToAST(objectDefinition.eval(), true),
     ClearStatement: (_, __) => Compiler.clearContext(),
     SetStatement: (_, setDefinition, __) => setDefinition.eval(),
-  
+
     // Object Definition
     ObjectDefinition: e => e.eval(),
     ObjectDefinition_line_definition: (_, a1, a2, a3, a4) =>
@@ -56,7 +56,7 @@ export class Compiler {
       new Circle(a1.eval(), a2.eval(), a3.eval()),
     FillableObjectDefinition_rect_definition: (_, a1, a2, a3, a4) =>
       new Rect(a1.eval(), a2.eval(), a3.eval(), a4.eval()),
-    
+
     // Set Definition
     SetDefinition: (property, value) => {
       switch (property.primitiveValue) {
@@ -84,17 +84,34 @@ export class Compiler {
       Compiler.globalVariableMap.get(
         first.primitiveValue + rest.primitiveValue
       ),
-    ArithmeticStatement_arithmetic_parentheses: (_, as, __) => 0,
-    ArithmeticStatement_minus_arithmetic_parentheses: (_, _minus, as, __) => 0,
-    ArithmeticStatement_arithmetic_operation: (as1, op, as2) => 0,
-    
+    ArithmeticStatement_arithmetic_parentheses: (_, as, __) => as.eval(),
+    ArithmeticStatement_minus_arithmetic_parentheses: (_, _minus, as, __) =>
+      '-' + as.eval(),
+    ArithmeticStatement_arithmetic_operation: (as1, op, as2) => {
+      const val1 = as1.eval();
+      const val2 = as2.eval();
+
+      console.log(op.eval());
+      switch (op.eval()) {
+        case '+':
+          return as1 + as2;
+        case '-':
+          return as1 - as1;
+        case '*':
+          return as1 * as2;
+        case '/':
+          return as1 / as2;
+      }
+    },
+    arithmeticOperator: e => e.primitiveValue,
+
     // alnum
     alnum: e => e.eval(),
     letter: e => e.eval(),
     upper: e => e.primitiveValue,
     lower: e => e.primitiveValue,
     digit: e => e.primitiveValue,
-    
+
     // color value
     colorValue: (_, d1, d2, d3, d4, d5, d6) =>
       '#' +
