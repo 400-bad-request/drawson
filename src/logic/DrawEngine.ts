@@ -173,22 +173,23 @@ export class DrawEngine {
               x: object.x,
               y: object.y,
             });
-            if (object.background_color !== 'TRANSPARENT')
+            if (object.background_color === 'TRANSPARENT')
+              DrawUtil.drawCircle(
+                this.canvas,
+                point,
+                object.r,
+                0,
+                360,
+                object.line_color,
+                object.line_thickness
+              );
+            else
               DrawUtil.drawCircleWithFill(
                 this.canvas,
                 point,
                 object.r,
                 object.background_color
               );
-            DrawUtil.drawCircle(
-              this.canvas,
-              point,
-              object.r,
-              0,
-              360,
-              object.line_color,
-              object.line_thickness
-            );
             break;
           case 'line':
             const point1: IPoint = this.applyAnchorToPoint({
@@ -214,18 +215,19 @@ export class DrawEngine {
               width: object.width,
               height: object.height,
             });
-            if (object.background_color !== 'TRANSPARENT')
+            if (object.background_color === 'TRANSPARENT')
+              DrawUtil.drawRect(
+                this.canvas,
+                rect,
+                object.line_color,
+                object.line_thickness
+              );
+            else
               DrawUtil.drawRectWithFill(
                 this.canvas,
                 rect,
                 object.background_color
               );
-            DrawUtil.drawRect(
-              this.canvas,
-              rect,
-              object.line_color,
-              object.line_thickness
-            );
             break;
         }
       }
