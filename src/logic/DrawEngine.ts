@@ -173,12 +173,13 @@ export class DrawEngine {
               x: object.x,
               y: object.y,
             });
-            DrawUtil.drawCircleWithFill(
-              this.canvas,
-              point,
-              object.r,
-              object.background_color
-            );
+            if (object.background_color !== 'TRANSPARENT')
+              DrawUtil.drawCircleWithFill(
+                this.canvas,
+                point,
+                object.r,
+                object.background_color
+              );
             DrawUtil.drawCircle(
               this.canvas,
               point,
@@ -213,11 +214,12 @@ export class DrawEngine {
               width: object.width,
               height: object.height,
             });
-            DrawUtil.drawRectWithFill(
-              this.canvas,
-              rect,
-              object.background_color
-            );
+            if (object.background_color !== 'TRANSPARENT')
+              DrawUtil.drawRectWithFill(
+                this.canvas,
+                rect,
+                object.background_color
+              );
             DrawUtil.drawRect(
               this.canvas,
               rect,

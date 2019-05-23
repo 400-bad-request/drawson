@@ -23,7 +23,7 @@ export class Compiler {
     Comment: (start, notEnd, commentEnd) => '',
     DrawStatement: (_, objectDefinition, teminator) => {
       let obj = objectDefinition.eval();
-      obj.backgroundColor = Compiler.backgroundColor;
+      obj.backgroundColor = 'TRANSPARENT';
       obj.lineThickness = Compiler.lineThickness;
       obj.lineColor = Compiler.lineColor;
       Compiler.AST.push(obj);
