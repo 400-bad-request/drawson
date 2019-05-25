@@ -15,7 +15,7 @@ Drawson {
     | DefinitionWithAssignmentStatement
     | Comment
 
-  WhileLoop = whileKeyword leftParentheses ConditionalStatement rightParentheses LoopBody
+  WhileLoop = whileKeyword "(" ConditionalStatement ")" LoopBody
   
   whileKeyword = "while"
 
@@ -24,30 +24,30 @@ Drawson {
   forKeyword = "for"
   inKeyword = "in"
 
-  LoopBody = leftCurlyBrace StatementList rightCurlyBrace
+  LoopBody = "{" StatementList "}"
 
-  DefinitionStatement = variableKeyword identifier terminator
+  DefinitionStatement = variableKeyword identifier ";"
 
-  AssignmentStatement = identifier "=" ArithmeticStatement terminator
+  AssignmentStatement = identifier "=" ArithmeticStatement ";"
 
-  DefinitionWithAssignmentStatement = variableKeyword identifier "=" ArithmeticStatement terminator
+  DefinitionWithAssignmentStatement = variableKeyword identifier "=" ArithmeticStatement ";"
 
   variableKeyword = "let"
 
-  ClearStatement = "clear" terminator
+  ClearStatement = "clear" ";"
 
-  SetStatement = "set" SetDefinition terminator 
+  SetStatement = "set" SetDefinition ";" 
 
   SetDefinition 
     = "color" colorValue
     | "paint" colorValue
     | "thickness" ArithmeticStatement
       
-  DrawStatement = drawKeyword ObjectDefinition terminator
+  DrawStatement = drawKeyword ObjectDefinition ";"
 
   drawKeyword = "draw"
 
-  FillStatement = fillKeyword FillableObjectDefinition terminator
+  FillStatement = fillKeyword FillableObjectDefinition ";"
 
   fillKeyword = "fill"
 
@@ -65,28 +65,35 @@ Drawson {
   rectObjectKeyword = "rect"
   
   ConditionalStatement 
-    = not ConditionalStatement -- negation
+    = "!" ConditionalStatement -- negation
     | ConditionalStatement logicalOperator ConditionalStatement -- operator_join
-    | leftParentheses ConditionalStatement rightParentheses -- contidion_parentheses
+    | "(" ConditionalStatement ")" -- contidion_parentheses
     | ArithmeticStatement relationalOperator ArithmeticStatement -- arithmetic_condition
 
-  ArithmeticStatement 
-    = integer
-    | identifier -- variable
-    | leftParentheses ArithmeticStatement rightParentheses -- arithmetic_parentheses
-    | leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
-    | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
+  ArithmeticStatement
+    = AddStatement
+
+  AddStatement
+    = AddStatement "+" MulStatement -- plus
+    | AddStatement "-" MulStatement -- minus
+    | MulStatement
+
+  MulStatement
+    = MulStatement "*" PriStatement -- times
+    | MulStatement "/" PriStatement -- divide
+    | PriStatement
+
+  PriStatement
+    = "(" ArithmeticStatement ")" -- paren
+    | "+" PriStatement -- pos
+    | "-" PriStatement -- neg
+    | identifier -- var
+    | integer
 
   Comment = commentStart notEndOfComment* commentEnd
   commentStart = "/*"
   notEndOfComment= ~commentEnd any
   commentEnd = "*/"
-
-  arithmeticOperator 
-    = "+"
-    | "-"
-    | "*"
-    | "/"
 
   logicalOperator 
     = "&&"
@@ -100,27 +107,13 @@ Drawson {
     | ">="
     | "<="
 
-  identifier = ~drawKeyword ~fillKeyword ~circleObjectKeyword ~rectObjectKeyword ~lineObjectKeyword lower alnum*
+  identifier = ~drawKeyword ~fillKeyword ~circleObjectKeyword ~rectObjectKeyword ~lineObjectKeyword letter alnum*
 
   colorValue = "#" alnum alnum alnum alnum alnum alnum
-  
-  leftCurlyBrace = "{"
-
-  rightCurlyBrace = "}"
-
-  leftParentheses = "("
-
-  rightParentheses = ")"
 
   integer
     = nonZeroDigit digit* -- number
     | "0" -- zero
 
   nonZeroDigit = ~"0" digit
-
-  not = "!"
-
-  minus = "-"
-
-  terminator = ";"
 }
