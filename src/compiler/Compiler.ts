@@ -36,6 +36,7 @@ export class Compiler {
     // Base
     Start: e => {
       Compiler.AST = [];
+      Compiler.varMap = new Map();
       return e.eval();
     },
     Statement: e => e.eval(),
@@ -75,6 +76,23 @@ export class Compiler {
 
     // Arithmetic
     ArithmeticStatement: e => e.eval(),
+    AddStatement: e => e.eval(),
+    AddStatement_plus: (as1, _, as2) => as1.eval() + as2.eval(),
+    AddStatement_minus: (as1, _, as2) => as1.eval() - as2.eval(),
+
+    MulStatement: e => e.eval(),
+    MulStatement_times: (as1, _, as2) => as1.eval() * as2.eval(),
+    MulStatement_divide: (as1, _, as2) => as1.eval() / as2.eval(),
+
+    PriStatement: e => e.eval(),
+    PriStatement_paren: (lp, as, rp) => as.eval(),
+    PriStatement_pos: (_, as) => as.eval(),
+    PriStatement_neg: (_, as) => -as.eval(),
+    PriStatement_var: e => {
+      const identifier = e.eval();
+      return Compiler.varMap.get(identifier);
+    },
+
     integer_number: (first, rest) =>
       parseInt(
         first.eval() + rest.children.reduce((acc, val) => acc + val.eval(), '')
@@ -83,30 +101,6 @@ export class Compiler {
     integer_zero: e => '0',
     identifier: (first, rest) =>
       first.eval() + rest.children.reduce((acc, val) => acc + val.eval(), ''),
-    ArithmeticStatement_variable: idfier => Compiler.varMap.get(idfier.eval()),
-    ArithmeticStatement_arithmetic_parentheses: (_, as, __) => as.eval(),
-    ArithmeticStatement_minus_arithmetic_parentheses: (_, _minus, as, __) =>
-      '-' + as.eval(),
-    ArithmeticStatement_arithmetic_operation: (as1, op, as2) => {
-      const val1 = as1.eval();
-      const val2 = as2.eval();
-
-      console.log(op.eval());
-      switch (op.eval()) {
-        case '+':
-          return val1 + val2;
-        case '-':
-          return val1 - val2;
-        case '*':
-          return val1 * val2;
-        case '/':
-          return val1 / val2;
-      }
-    },
-    arithmeticOperator: e => {
-      console.log(e.primitiveValue);
-      return e.primitiveValue;
-    },
 
     // For Loop
     ForLoop: (_, idfier, inKeyword, as1, as2, body) => {
