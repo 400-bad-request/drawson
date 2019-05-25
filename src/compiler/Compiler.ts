@@ -1,4 +1,5 @@
 import ohm from 'ohm-js';
+import range from 'lodash.range';
 // @ts-ignore
 import grammarUrl from '../grammar.ohm';
 import { Line } from './AST/Line';
@@ -109,8 +110,13 @@ export class Compiler {
 
     // For Loop
     ForLoop: (_, idfier, inKeyword, as1, as2, body) => {
-      
+      const loopRange = range(as1.eval(), as2.eval());
+      loopRange.forEach(el => {
+        Compiler.varMap.set(idfier.eval(), el);
+        body.eval();
+      });
     },
+    LoopBody: (_, body, __) => body.eval(),
 
     // Variable Definition
     DefinitionStatement: (_, idfier, __) => {
