@@ -108,18 +108,28 @@ export class Compiler {
     },
 
     // For Loop
-    ForLoop: (_, idfier, inKeyword, as1, as2, body) => {},
+    ForLoop: (_, idfier, inKeyword, as1, as2, body) => {
+      
+    },
 
     // Variable Definition
     DefinitionStatement: (_, idfier, __) => {
-      Compiler.varMap.set(idfier.eval(), null);
+      const identifier = idfier.eval();
+      if (!Compiler.varMap.has(identifier))
+        Compiler.varMap.set(identifier, null);
+      else console.error(`variable ${identifier} already defined`);
     },
     AssignmentStatement: (idfier, eq, as, __) => {
-      if (Compiler.varMap.has(idfier.eval()))
-        Compiler.varMap.set(idfier.eval(), as.eval());
+      const identifier = idfier.eval();
+      if (Compiler.varMap.has(identifier))
+        Compiler.varMap.set(identifier, as.eval());
+      else console.error(`variable ${identifier} has not yet been defined`);
     },
     DefinitionWithAssignmentStatement: (_, idfier, eq, as, __) => {
-      Compiler.varMap.set(idfier.eval(), as.eval());
+      const identifier = idfier.eval();
+      if (!Compiler.varMap.has(identifier))
+        Compiler.varMap.set(identifier, as.eval());
+      else console.error(`variable ${identifier} already defined`);
     },
 
     // alnum
