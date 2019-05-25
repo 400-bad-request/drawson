@@ -9,7 +9,7 @@ export class Compiler {
   private static grammar: any;
   private static semantics: any;
   private static AST = [];
-  private static globalVariableMap = new Map();
+  private static varMap = new Map();
   private static lineColor = '#000000';
   private static lineThickness = 1;
   private static backgroundColor = '#AA12DF';
@@ -81,9 +81,8 @@ export class Compiler {
     nonZeroDigit: e => e.eval(),
     integer_zero: e => '0',
     identifier: (first, rest) =>
-      Compiler.globalVariableMap.get(
-        first.primitiveValue + rest.primitiveValue
-      ),
+      first.eval() + rest.children.reduce((acc, val) => acc + val.eval(), ''),
+    ArithmeticStatement_variable: idfier => Compiler.varMap.get(idfier.eval()),
     ArithmeticStatement_arithmetic_parentheses: (_, as, __) => as.eval(),
     ArithmeticStatement_minus_arithmetic_parentheses: (_, _minus, as, __) =>
       '-' + as.eval(),
@@ -94,16 +93,34 @@ export class Compiler {
       console.log(op.eval());
       switch (op.eval()) {
         case '+':
-          return as1 + as2;
+          return val1 + val2;
         case '-':
-          return as1 - as1;
+          return val1 - val2;
         case '*':
-          return as1 * as2;
+          return val1 * val2;
         case '/':
-          return as1 / as2;
+          return val1 / val2;
       }
     },
-    arithmeticOperator: e => e.primitiveValue,
+    arithmeticOperator: e => {
+      console.log(e.primitiveValue);
+      return e.primitiveValue;
+    },
+
+    // For Loop
+    ForLoop: (_, idfier, inKeyword, as1, as2, body) => {},
+
+    // Variable Definition
+    DefinitionStatement: (_, idfier, __) => {
+      Compiler.varMap.set(idfier.eval(), null);
+    },
+    AssignmentStatement: (idfier, eq, as, __) => {
+      if (Compiler.varMap.has(idfier.eval()))
+        Compiler.varMap.set(idfier.eval(), as.eval());
+    },
+    DefinitionWithAssignmentStatement: (_, idfier, eq, as, __) => {
+      Compiler.varMap.set(idfier.eval(), as.eval());
+    },
 
     // alnum
     alnum: e => e.eval(),

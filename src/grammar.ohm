@@ -30,7 +30,7 @@ Drawson {
 
   AssignmentStatement = identifier "=" ArithmeticStatement terminator
 
-  DefinitionWithAssignmentStatement = variableKeyword AssignmentStatement
+  DefinitionWithAssignmentStatement = variableKeyword identifier "=" ArithmeticStatement terminator
 
   variableKeyword = "let"
 
@@ -72,7 +72,7 @@ Drawson {
 
   ArithmeticStatement 
     = integer
-    | identifier
+    | identifier -- variable
     | leftParentheses ArithmeticStatement rightParentheses -- arithmetic_parentheses
     | leftParentheses minus ArithmeticStatement rightParentheses -- minus_arithmetic_parentheses
     | ArithmeticStatement arithmeticOperator ArithmeticStatement -- arithmetic_operation
