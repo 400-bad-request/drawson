@@ -63,12 +63,6 @@ Drawson {
 
   circleObjectKeyword = "circle"
   rectObjectKeyword = "rect"
-  
-  ConditionalStatement 
-    = "!" ConditionalStatement -- negation
-    | ConditionalStatement logicalOperator ConditionalStatement -- operator_join
-    | "(" ConditionalStatement ")" -- contidion_parentheses
-    | ArithmeticStatement relationalOperator ArithmeticStatement -- arithmetic_condition
 
   ArithmeticStatement
     = AddStatement
@@ -90,24 +84,48 @@ Drawson {
     | identifier -- var
     | integer
 
+  ConditionalStatement
+    = OrStatement
+
+  OrStatement
+    = OrStatement "||" AndStatement -- exp
+    | AndStatement
+
+  AndStatement
+    = AndStatement "&&" LogicalExp -- exp
+    | LogicalExp
+
+  LogicalExp
+    = "!" LogicalExp -- not
+    | RelationStatement -- relation
+    | "(" ConditionalStatement ")" -- paren
+    | boolean -- bool
+
+  boolean
+    = "true"
+    | "false"
+
+  RelationStatement
+    = ArithmeticStatement ">" ArithmeticStatement -- gt
+    | ArithmeticStatement "<" ArithmeticStatement -- lt
+    | ArithmeticStatement ">=" ArithmeticStatement -- geq
+    | ArithmeticStatement "<=" ArithmeticStatement -- leq
+    | ArithmeticStatement "==" ArithmeticStatement -- eq
+    | ArithmeticStatement "!=" ArithmeticStatement -- neq
+
   Comment = commentStart notEndOfComment* commentEnd
   commentStart = "/*"
   notEndOfComment= ~commentEnd any
   commentEnd = "*/"
 
-  logicalOperator 
-    = "&&"
-    | "||"
+  identifier = ~keyword ~boolean letter alnum*
 
-  relationalOperator 
-    = "=="
-    | "!="
-    | ">"
-    | "<"
-    | ">="
-    | "<="
-
-  identifier = ~drawKeyword ~fillKeyword ~circleObjectKeyword ~rectObjectKeyword ~lineObjectKeyword letter alnum*
+  keyword
+    = drawKeyword 
+    | fillKeyword 
+    | circleObjectKeyword 
+    | rectObjectKeyword 
+    | lineObjectKeyword
 
   colorValue = "#" alnum alnum alnum alnum alnum alnum
 

@@ -110,7 +110,38 @@ export class Compiler {
         body.eval();
       });
     },
+
+    // While Loop:
+    WhileLoop: (_, _lp, cond, _rp, body) => {
+      while (cond.eval()) {
+        body.eval();
+      }
+    },
+
     LoopBody: (_, body, __) => body.eval(),
+
+    // Condition Statement:
+    ConditionalStatement: e => e.eval(),
+    OrStatement_exp: (orst, _, andst) => orst.eval() || andst.eval(),
+    OrStatement: andst => andst.eval(),
+    AndStatement: logexp => logexp.eval(),
+    AndStatement_exp: (andst, _, logexp) => andst.eval() && logexp.eval(),
+
+    // Logical:
+    LogicalExp_not: (_, val) => !val.eval(),
+    LogicalExp_relation: e => e.eval(),
+    LogicalExp_paren: (_lp, cond, _rp) => cond.eval(),
+    LogicalExp_bool: bool => bool.eval(),
+
+    boolean: e => (e.primitiveValue === 'true' ? true : false),
+
+    // Relation:
+    RelationStatement_gt: (as1, _, as2) => as1.eval() > as2.eval(),
+    RelationStatement_lt: (as1, _, as2) => as1.eval() < as2.eval(),
+    RelationStatement_geq: (as1, _, as2) => as1.eval() >= as2.eval(),
+    RelationStatement_leq: (as1, _, as2) => as1.eval() <= as2.eval(),
+    RelationStatement_eq: (as1, _, as2) => as1.eval() == as2.eval(),
+    RelationStatement_neq: (as1, _, as2) => as1.eval() != as2.eval(),
 
     // Variable Definition
     DefinitionStatement: (_, idfier, __) => {
