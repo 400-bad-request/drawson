@@ -9,7 +9,7 @@ Code playground that lets you draw images on canvas and peek compiler outcome.
 ## Documentation
 
 To draw something you actually need to learn the drawson language.
-In order to do this head over here to get the language doc [here](DOC.md).
+In order to do this head over here to get the language doc [here](LANGUAGE.md).
 
 ## Development
 
