@@ -22,3 +22,12 @@ export function updateCodeEditorContent(
     },
   };
 }
+
+export function updateErrorOutput(compilationError: string): EditorActionTypes {
+  return {
+    type: Action.UPDATE_COMPILATION_ERROR,
+    payload: {
+      compilationError,
+    },
+  };
+}

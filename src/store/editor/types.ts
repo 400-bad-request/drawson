@@ -3,6 +3,7 @@ import { Action } from '../Action';
 export type EditorState = {
   codeEditorContent: string;
   compilationOutput: string;
+  compilationError: string;
 };
 
 interface UpdateCompilationOutputAction {
@@ -19,6 +20,14 @@ interface UpdateCodeEditorContentAction {
   };
 }
 
+interface UpdateCompilationErrorAction {
+  type: typeof Action.UPDATE_COMPILATION_ERROR;
+  payload: {
+    compilationError: string;
+  };
+}
+
 export type EditorActionTypes =
   | UpdateCompilationOutputAction
-  | UpdateCodeEditorContentAction;
+  | UpdateCodeEditorContentAction
+  | UpdateCompilationErrorAction;

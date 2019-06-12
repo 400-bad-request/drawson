@@ -2,9 +2,10 @@ import ohm from 'ohm-js';
 import range from 'lodash.range';
 // @ts-ignore
 import grammarUrl from '../grammar.ohm';
-import { Line } from './AST/Line';
-import { Circle } from './AST/Circle';
-import { Rect } from './AST/Rect';
+import { Line } from './Types/Line';
+import { Circle } from './Types/Circle';
+import { Rect } from './Types/Rect';
+import { CompilationResult } from './Types/CompilationResult';
 
 export class Compiler {
   private static grammar: any;
@@ -181,16 +182,20 @@ export class Compiler {
       d6.eval(),
   };
 
-  public static async compile(code: string): Promise<string> {
-    let match = Compiler.grammar.match(code);
-    if (match.succeeded()) {
-      console.log('compilation success 🎉');
-      Compiler.semantics(match).eval();
-      return JSON.stringify(Compiler.AST, null, 2);
+  public static async compile(code: string): Promise<CompilationResult> {
+    let matchResult = Compiler.grammar.match(code);
+    if (matchResult.succeeded()) {
+      Compiler.semantics(matchResult).eval();
+      return {
+        status: true,
+        compilationOutput: JSON.stringify(Compiler.AST, null, 2),
+      };
     } else {
-      console.error('compilation failure, parsing gone wrong');
-      console.error(match.message);
-      return '[]';
+      return {
+        status: false,
+        compilationOutput: JSON.stringify(Compiler.AST, null, 2),
+        error: matchResult.message,
+      };
     }
   }
 

@@ -1,9 +1,10 @@
-import { Action } from '../Action';
 import { EditorActionTypes, EditorState } from './types';
+import { Action } from '../Action';
 
 const initialState: EditorState = {
   compilationOutput: '[]',
   codeEditorContent: '',
+  compilationError: null,
 };
 
 export function editorReducer(
@@ -21,6 +22,12 @@ export function editorReducer(
       return {
         ...state,
         codeEditorContent: action.payload.codeEditorContent,
+      };
+    }
+    case Action.UPDATE_COMPILATION_ERROR: {
+      return {
+        ...state,
+        compilationError: action.payload.compilationError,
       };
     }
     default:
