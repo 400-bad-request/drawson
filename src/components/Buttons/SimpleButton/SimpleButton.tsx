@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import './SimpleButton.scss';
 
-interface IProps {
+interface Props {
   active?: boolean;
   filled?: boolean;
   key?: string;
@@ -11,21 +11,23 @@ interface IProps {
   style?: React.CSSProperties;
 }
 
-export const SimpleButton = (props: IProps) => {
+export const SimpleButton: React.FC<Props> = ({
+  active,
+  filled,
+  label,
+  onClick,
+  key,
+  style,
+}) => {
   const getClassName = () => {
     return classNames('SimpleButton', {
-      active: props.active,
-      fill: props.filled,
+      active: active,
+      fill: filled,
     });
   };
   return (
-    <div
-      className={getClassName()}
-      onClick={props.onClick}
-      key={props.key}
-      style={props.style}
-    >
-      {props.label}
+    <div className={getClassName()} onClick={onClick} key={key} style={style}>
+      {label}
     </div>
   );
 };

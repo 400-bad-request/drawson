@@ -7,15 +7,19 @@ import { PopupType } from '../../../utils/types/PopupType';
 import { GenericYesNoPopup } from '../GenericYesNoPopup/GenericYesNoPopup';
 import { FileUtil } from '../../../utils/FileUtil';
 
-interface IProps {
+interface Props {
   updateActivePopupType: (activePopupType: PopupType) => any;
   activePopupType: PopupType;
   codeEditorContent: string;
 }
 
-const PopupLayerComponent = (props: IProps) => {
+const PopupLayerComponent: React.FC<Props> = ({
+  activePopupType,
+  codeEditorContent,
+  updateActivePopupType,
+}) => {
   const getPopupTopic = () => {
-    switch (props.activePopupType) {
+    switch (activePopupType) {
       case PopupType.IMPORT:
         return 'Import saved project from your device';
       case PopupType.EXPORT:
@@ -30,7 +34,7 @@ const PopupLayerComponent = (props: IProps) => {
   };
 
   const getPopupContent = () => {
-    switch (props.activePopupType) {
+    switch (activePopupType) {
       case PopupType.EXPORT:
         return (
           <GenericYesNoPopup
@@ -40,7 +44,7 @@ const PopupLayerComponent = (props: IProps) => {
             successLabel={'Save'}
             onSuccess={saveAndClose}
             failureLabel={'No thanks'}
-            onFailure={() => props.updateActivePopupType(null)}
+            onFailure={() => updateActivePopupType(null)}
           />
         );
       default:
@@ -49,15 +53,12 @@ const PopupLayerComponent = (props: IProps) => {
   };
 
   const saveAndClose = () => {
-    FileUtil.saveTextToFile(props.codeEditorContent);
-    props.updateActivePopupType(null);
+    FileUtil.saveTextToFile(codeEditorContent);
+    updateActivePopupType(null);
   };
 
-  return props.activePopupType ? (
-    <div
-      className="PopupLayer"
-      onClick={() => props.updateActivePopupType(null)}
-    >
+  return activePopupType ? (
+    <div className="PopupLayer" onClick={() => updateActivePopupType(null)}>
       <div className="PopupContent" onClick={e => e.stopPropagation()}>
         <div className="PopupTopBar">{getPopupTopic()}</div>
         {getPopupContent()}
@@ -72,7 +73,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const dispatchToProps = {
-  updateActivePopupType: updateActivePopupType,
+  updateActivePopupType,
 };
 
 export const PopupLayer = connect(

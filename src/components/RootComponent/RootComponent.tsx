@@ -13,7 +13,7 @@ let resizingHorizontal = false;
 let cachedWidth: number, cachedHeight: number;
 let startX: number, startY: number;
 
-const RootComponent = () => {
+export const RootComponent: React.FC<{}> = () => {
   const [width, setWidth] = useState(
     (window.innerWidth - Settings.RESIZE_BAR_WIDTH) / 2
   );
@@ -112,5 +112,3 @@ const RootComponent = () => {
     </div>
   );
 };
-
-export default RootComponent;

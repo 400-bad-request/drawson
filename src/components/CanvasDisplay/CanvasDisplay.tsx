@@ -4,13 +4,13 @@ import { DrawEngine } from '../../logic/DrawEngine';
 import { AppState } from '../../store';
 import { connect } from 'react-redux';
 
-interface IProps {
+interface Props {
   width: number;
   height: number;
   compilationOutput: string;
 }
 
-export class CanvasDisplayComponent extends React.Component<IProps, {}> {
+export class CanvasDisplayComponent extends React.Component<Props, {}> {
   protected displayCanvas: HTMLCanvasElement;
   protected drawEngine: DrawEngine;
 
@@ -23,7 +23,7 @@ export class CanvasDisplayComponent extends React.Component<IProps, {}> {
   }
 
   public componentDidUpdate(
-    prevProps: Readonly<IProps>,
+    prevProps: Readonly<Props>,
     prevState: Readonly<{}>
   ): void {
     if (

@@ -1,20 +1,20 @@
 import React from 'react';
 import './EditorLayer.scss';
 import { NavigationBar } from '../NavigationBar/NavigationBar';
-import RootComponent from '../RootComponent/RootComponent';
 import { PopupType } from '../../utils/types/PopupType';
 import classNames from 'classnames';
 import { AppState } from '../../store';
 import { connect } from 'react-redux';
+import { RootComponent } from '../RootComponent/RootComponent';
 
-interface IProps {
+interface Props {
   activePopupType: PopupType;
 }
 
-const EditorLayerComponent = (props: IProps) => {
+const EditorLayerComponent: React.FC<Props> = ({ activePopupType }) => {
   const getClassName = () => {
     return classNames('EditorLayer', {
-      blur: !!props.activePopupType,
+      blur: !!activePopupType,
     });
   };
 

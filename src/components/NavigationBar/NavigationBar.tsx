@@ -6,12 +6,15 @@ import { connect } from 'react-redux';
 import { PopupType } from '../../utils/types/PopupType';
 import { updateActivePopupType } from '../../store/general/actionCreators';
 
-interface IProps {
+interface Props {
   updateActivePopupType: (activePopupType: PopupType) => any;
   activePopupType: PopupType;
 }
 
-const NavigationBarComponent = (props: IProps) => {
+const NavigationBarComponent: React.FC<Props> = ({
+  activePopupType,
+  updateActivePopupType,
+}) => {
   return (
     <div className="NavigationBar">
       <div className="NavigationBarGroup">
@@ -25,20 +28,20 @@ const NavigationBarComponent = (props: IProps) => {
         <UnderlineTextButton
           label={'IMPORT'}
           under={true}
-          active={props.activePopupType === PopupType.IMPORT}
-          onClick={() => props.updateActivePopupType(PopupType.IMPORT)}
+          active={activePopupType === PopupType.IMPORT}
+          onClick={() => updateActivePopupType(PopupType.IMPORT)}
         />
         <UnderlineTextButton
           label={'EXPORT'}
           under={true}
-          active={props.activePopupType === PopupType.EXPORT}
-          onClick={() => props.updateActivePopupType(PopupType.EXPORT)}
+          active={activePopupType === PopupType.EXPORT}
+          onClick={() => updateActivePopupType(PopupType.EXPORT)}
         />
         <UnderlineTextButton
           label={'OPTIONS'}
           under={true}
-          active={props.activePopupType === PopupType.OPTIONS}
-          onClick={() => props.updateActivePopupType(PopupType.OPTIONS)}
+          active={activePopupType === PopupType.OPTIONS}
+          onClick={() => updateActivePopupType(PopupType.OPTIONS)}
         />
         <UnderlineTextButton label={'COMPILE'} under={true} />
       </div>
@@ -46,8 +49,8 @@ const NavigationBarComponent = (props: IProps) => {
         <UnderlineTextButton
           label={'ABOUT'}
           under={true}
-          active={props.activePopupType === PopupType.ABOUT}
-          onClick={() => props.updateActivePopupType(PopupType.ABOUT)}
+          active={activePopupType === PopupType.ABOUT}
+          onClick={() => updateActivePopupType(PopupType.ABOUT)}
         />
       </div>
     </div>

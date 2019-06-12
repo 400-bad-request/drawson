@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import './UnderlineTextButton.scss';
 
-interface IProps {
+interface Props {
   under?: boolean;
   over?: boolean;
   active?: boolean;
@@ -12,7 +12,7 @@ interface IProps {
   style?: React.CSSProperties;
 }
 
-export const UnderlineTextButton = (props: IProps) => {
+export const UnderlineTextButton: React.FC<Props> = props => {
   const getClassName = () => {
     return classNames('UnderlineTextButton', {
       under: props.under,
