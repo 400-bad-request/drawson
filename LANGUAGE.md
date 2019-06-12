@@ -109,5 +109,5 @@ There are 6 of operators here:
 - `>` greater than
 - `<=` less or equal than
 - `>=` greater or equal than
-- ==` equal to
+- `==` equal to
 - `!=` not equal to
