@@ -78,7 +78,8 @@ export class Compiler {
     // Arithmetic
     ArithmeticStatement: e => e.eval(),
     AddStatement: e => e.eval(),
-    AddStatement_plus: (as1, _, as2) => as1.eval() + as2.eval(),
+    AddStatement_plus: (as1, _, as2) =>
+      parseInt(as1.eval()) + parseInt(as2.eval()),
     AddStatement_minus: (as1, _, as2) => as1.eval() - as2.eval(),
 
     MulStatement: e => e.eval(),
