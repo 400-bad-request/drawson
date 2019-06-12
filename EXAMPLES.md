@@ -33,5 +33,28 @@ draw line 75 100 100 115;
 
 ## Pyramid Example
 ```
+/* defining coordinates */
+let xCoord = 150;
+let yCoord = 0;
+let blocks = 0;
+let blockSize = 50;
+let tempXCoord;
 
+/* defining colors */
+set color #dba833;
+set paint #4b3e31;
+set thickness 2;
+
+/* loop */
+for row in 0 7 {
+    yCoord = row * blockSize;
+    xCoord = 150 - (blockSize / 2) * row;
+    blocks = blocks + 1;
+    tempXCoord = xCoord;
+    for el in 0 blocks {
+        fill rect tempXCoord yCoord blockSize blockSize;
+        draw rect tempXCoord yCoord blockSize blockSize;
+        tempXCoord = tempXCoord + blockSize;
+    }
+}
 ```
